@@ -3,6 +3,34 @@
     <div>
       <button @click="getBlockchainData()">say hi from blockchain.co</button>
       <button @click="getCEXData()">say hi from CEX</button>
+      <button @click="compareExchanges(exchange1Spread, exchange2Spread)">
+        compare Exchanges
+      </button>
+      <p>Right now you should buy on {{ buyOn }} and sell on {{ sellOn }}!</p>
+      <div>
+        <span>
+          <p>
+            Bid Price on {{ exchange1Spread.exchange }}:
+            {{ exchange1Spread.bid }}
+          </p>
+          <p>
+            Ask Price on {{ exchange1Spread.exchange }}:
+            {{ exchange1Spread.ask }}
+          </p>
+        </span>
+      </div>
+      <div>
+        <span>
+          <p>
+            Bid Price on {{ exchange2Spread.exchange }}:
+            {{ exchange2Spread.bid }}
+          </p>
+          <p>
+            Ask Price on {{ exchange2Spread.exchange }}:
+            {{ exchange2Spread.ask }}
+          </p>
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -13,6 +41,8 @@ export default {
     return {
       exchange1Spread: {},
       exchange2Spread: {},
+      buyOn: '',
+      sellOn: '',
     }
   },
 
@@ -40,7 +70,7 @@ export default {
             }
           }
           this.exchange1Spread = convertData(response.data)
-          this.exchange1Spread.exchange = 'Blockchain.com'
+          this.exchange1Spread.exchange = 'Blockchain'
         })
     },
     getCEXData: function () {
@@ -64,8 +94,9 @@ export default {
             askQty: data.asks[smallestAskIndex][1],
           }
         }
+
         this.exchange2Spread = convertData(response.data)
-        this.exchange2Spread.exchange = 'CEX.io'
+        this.exchange2Spread.exchange = 'CEX'
       })
     },
     // the below function takes in an array of of array of prices in first position and qty in second
@@ -79,6 +110,22 @@ export default {
         highestBidQty: highestBidQty,
         smallestAskPrice: Math.round(smallestAskPrice),
         smallestAskQty: smallestAskQty,
+      }
+    },
+    compareExchanges: function (exchange1, exchange2) {
+      if (exchange1.bid > exchange2.bid) {
+        this.buyOn = exchange1.exchange
+      } else if (exchange1.bid < exchange2.bid) {
+        this.buyOn = exchange2.exchange
+      } else {
+        this.buyOn = 'either exchange'
+      }
+      if (exchange1.ask > exchange2.ask) {
+        this.sellOn = exchange1.exchange
+      } else if (exchange1.ask < exchange2.ask) {
+        this.sellOn = exchange2.exchange
+      } else {
+        this.sellOn = 'either exchange'
       }
     },
   },
