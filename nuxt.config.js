@@ -1,7 +1,7 @@
 export default {
 	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
-		title: 'crpyto-moon',
+		title: 'crypto-dreams',
 		htmlAttrs: {
 			lang: 'en'
 		},
@@ -30,7 +30,25 @@ export default {
 	buildModules: [],
 
 	// Modules: https://go.nuxtjs.dev/config-modules
-	modules: [ '@nuxtjs/axios' ],
+	modules: [ '@nuxtjs/axios', '@nuxtjs/proxy' ],
+
+	// axios proxy for avoiding cors
+	axios: {
+		proxy: true
+	},
+	// proxy targets for front-end for avoiding cors
+	proxy: {
+		'/getFTXData/': {
+			target: 'https://ftx.com/api/markets/BTC/USD/orderbook',
+			pathRewrite: { '^/getFTXData/': '' },
+			changeOrigin: true
+		},
+		'/getCEXData/': {
+			target: 'https://cex.io/api/order_book/BTC/USD/',
+			pathRewrite: { '^/getCEXData/': '' },
+			changeOrigin: true
+		}
+	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {}
