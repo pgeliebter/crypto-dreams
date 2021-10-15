@@ -1375,7 +1375,10 @@
 <script>
 export default {
   mounted: function () {
+    // hard coded feather for now but really needs to be loaded on all pages
     feather.replace()
+
+    // hard coded apex chart for now but would really like to call it as a component
     var cPrimary = '#5252F9'
     var cWarning = '#ffb016'
     var cSecondary = '#ff4d62'
