@@ -29,20 +29,21 @@ export default {
 			},
 			{
 				rel: 'stylesheet',
+				href: './assets/fonts/bootstrap-icons/bootstrap-icons.css'
+			},
+			{
+				rel: 'stylesheet',
 				href: './assets/vendor/css/choices.min.css'
 			},
 			{
 				rel: 'stylesheet',
 				href: './assets/css/style.min.css'
-			},
-			{
-				rel: 'stylesheet',
-				href: './assets/fonts/bootstrap-icons/bootstrap-icons.css'
 			}
 		],
 		script: [
 			{ src: './assets/vendor/feather.min.js', defer: true },
-			{ src: './assets/js/theme.bundle.js', defer: true }
+			{ src: './assets/js/theme.bundle.js', defer: true },
+			{ src: './assets/vendor/apexcharts.min.js', defer: true }
 		]
 	},
 
