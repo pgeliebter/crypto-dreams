@@ -29,26 +29,27 @@ export default {
 			},
 			{
 				rel: 'stylesheet',
-				href: '/assets/vendor/css/choices.min.css'
+				href: './assets/vendor/css/choices.min.css'
 			},
 			{
 				rel: 'stylesheet',
-				href: '/assets/css/style.min.css'
+				href: './assets/css/style.min.css'
 			},
 			{
 				rel: 'stylesheet',
-				href: '/assets/fonts/bootstrap-icons/bootstrap-icons.css'
+				href: './assets/fonts/bootstrap-icons/bootstrap-icons.css'
 			}
+		],
+		script: [
+			{ src: './assets/vendor/feather.min.js', defer: true },
+			{ src: './assets/js/theme.bundle.js', defer: true },
+			{ src: './assets/vendor/apexcharts.min.js', defer: true },
+			'feather.replace()'
 		]
 	},
 
 	// Global CSS: https://go.nuxtjs.dev/config-css
 	css: [],
-	script: [
-		{ src: '/assets/vendor/feather.min.js', defer: true },
-		{ src: '/assets/js/theme.bundle.js', defer: true },
-		{ src: '/assets/vendor/apexcharts.min.js', defer: true }
-	],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 	plugins: [],
