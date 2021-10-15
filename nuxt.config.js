@@ -14,11 +14,41 @@ export default {
 			{ hid: 'description', name: 'description', content: '' },
 			{ name: 'format-detection', content: 'telephone=no' }
 		],
-		link: [ { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' } ]
+		link: [
+			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+			{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+			{
+				rel: 'preconnect',
+				href: 'https://fonts.gstatic.com',
+				crossorigin: true
+			},
+			{
+				rel: 'stylesheet',
+				href:
+					'https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap'
+			},
+			{
+				rel: 'stylesheet',
+				href: '/assets/vendor/css/choices.min.css'
+			},
+			{
+				rel: 'stylesheet',
+				href: '/assets/css/style.min.css'
+			},
+			{
+				rel: 'stylesheet',
+				href: '/assets/fonts/bootstrap-icons/bootstrap-icons.css'
+			}
+		]
 	},
 
 	// Global CSS: https://go.nuxtjs.dev/config-css
 	css: [],
+	script: [
+		{ src: '/assets/vendor/feather.min.js', defer: true },
+		{ src: '/assets/js/theme.bundle.js', defer: true },
+		{ src: '/assets/vendor/apexcharts.min.js', defer: true }
+	],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 	plugins: [],
