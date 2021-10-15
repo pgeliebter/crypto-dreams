@@ -29,15 +29,15 @@ export default {
 			},
 			{
 				rel: 'stylesheet',
+				href: './assets/fonts/bootstrap-icons/bootstrap-icons.css'
+			},
+			{
+				rel: 'stylesheet',
 				href: './assets/vendor/css/choices.min.css'
 			},
 			{
 				rel: 'stylesheet',
 				href: './assets/css/style.min.css'
-			},
-			{
-				rel: 'stylesheet',
-				href: './assets/fonts/bootstrap-icons/bootstrap-icons.css'
 			}
 		],
 		script: [
