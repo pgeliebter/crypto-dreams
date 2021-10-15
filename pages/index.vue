@@ -1569,6 +1569,7 @@ export default {
         },
         yaxis: {
           labels: {
+            show: true,
             style: {
               colors: cMuted,
               fontFamily: cFont,
@@ -1577,11 +1578,35 @@ export default {
           crosshairs: {
             show: false,
           },
+          //would love to change these values to be calculation based off min and max
+          //wasted enough time on it already
+          min: function () {
+            let min = 0
+            props.exchange1Spread.bid <= props.exchange2Spread.bid
+              ? (min =
+                  props.exchange1Spread.bid -
+                  2 * (props.exchange1Spread.ask - props.exchange1Spread.bid))
+              : (min =
+                  props.exchange2Spread.bid -
+                  2 * (props.exchange2Spread.ask - props.exchange2Spread.bid))
+            // const length = min.toString().length - 3
+            // const powerOf = 10 ** length
+            // min = Math.round(min / powerOf) * powerOf
+            return min
+          },
+          max: function () {
+            let max
+            props.exchange1Spread.ask >= props.exchange2Spread.ask
+              ? (max = props.exchange1Spread.ask)
+              : (max = props.exchange2Spread.ask)
+            return max
+          },
         },
         plotOptions: {
           bar: {
             columnWidth: '40%',
             borderRadius: 4,
+            datalabels: { position: 'top' },
           },
         },
         dataLabels: {
@@ -1612,6 +1637,7 @@ export default {
             },
           ],
         },
+
         legend: {
           position: 'top',
           fontFamily: cFont,
