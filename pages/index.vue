@@ -822,7 +822,10 @@
                         align-items-center
                       "
                     >
-                      <h6 class="mb-0 pe-3 text-white">Revenue</h6>
+                      <h6 class="mb-0 pe-3 text-white">
+                        Bid - Ask spread for {{ spreadOne.exchange }} and
+                        {{ spreadTwo.exchange }}
+                      </h6>
                       <!--Dropdown-->
                       <div class="dropdown">
                         <a
@@ -879,7 +882,7 @@
                         align-items-center
                       "
                     >
-                      <h6 class="pe-3 mb-0 text-white">Visitors</h6>
+                      <h6 class="pe-3 mb-0 text-white">Recommendations</h6>
                       <!--Dropdown-->
                       <div class="dropdown">
                         <a
@@ -910,79 +913,20 @@
                         </div>
                       </div>
                     </div>
-                    <div class="card-body">
-                      <div id="chart-radial-bar"></div>
-                      <ul class="row list-unstyled mb-0">
-                        <li class="col-4 text-center">
-                          <span
-                            class="
-                              d-flex
-                              justify-content-center
-                              text-center
-                              align-items-center
-                            "
-                          >
-                            <span
-                              class="
-                                size-10
-                                rounded-pill
-                                bg-success
-                                me-2
-                                align-middle
-                                d-inline-block
-                              "
-                            ></span>
-                            <span class="text-muted">Organic</span>
-                          </span>
-                          <span class="fs-4 text-white">36%</span>
-                        </li>
-                        <li class="col-4 text-center">
-                          <span
-                            class="
-                              d-flex
-                              justify-content-center
-                              text-center
-                              align-items-center
-                            "
-                          >
-                            <span
-                              class="
-                                size-10
-                                rounded-pill
-                                bg-warning
-                                me-2
-                                align-middle
-                                d-inline-block
-                              "
-                            ></span>
-                            <span class="text-muted">Direct</span>
-                          </span>
-                          <span class="fs-4 text-white">48%</span>
-                        </li>
-                        <li class="col-4 text-center">
-                          <span
-                            class="
-                              d-flex
-                              justify-content-center
-                              text-center
-                              align-items-center
-                            "
-                          >
-                            <span
-                              class="
-                                size-10
-                                rounded-pill
-                                bg-primary
-                                me-2
-                                align-middle
-                                d-inline-block
-                              "
-                            ></span>
-                            <span class="text-muted">Referral</span>
-                          </span>
-                          <span class="fs-4 text-white">16%</span>
-                        </li>
-                      </ul>
+                    <div
+                      class="
+                        card-body
+                        d-flex
+                        align-items-center
+                        justify-content-around
+                        flex-column
+                        text-white
+                      "
+                    >
+                      <h6>Buy on</h6>
+                      <h3>{{ buyOn }}</h3>
+                      <h6>Sell on</h6>
+                      <h3>{{ sellOn }}</h3>
                     </div>
                   </div>
                 </div>
@@ -1376,8 +1320,8 @@
 export default {
   data: function () {
     return {
-      exchange1Spread: {},
-      exchange2Spread: {},
+      spreadOne: {},
+      spreadTwo: {},
       buyOn: '',
       sellOn: '',
     }
@@ -1389,12 +1333,12 @@ export default {
     this.getCEXData()
 
     setTimeout(() => {
-      this.compareExchanges(this.exchange1Spread, this.exchange2Spread)
+      this.compareExchanges(this.spreadOne, this.spreadTwo)
     }, 2000)
     setTimeout(() => {
       this.renderBarChart({
-        exchange1Spread: this.exchange1Spread,
-        exchange2Spread: this.exchange2Spread,
+        spreadOne: this.spreadOne,
+        spreadTwo: this.spreadTwo,
       })
     }, 5000)
 
@@ -1424,8 +1368,8 @@ export default {
               askQty: data.asks[smallestAskIndex].qty,
             }
           }
-          this.exchange1Spread = convertData(response.data)
-          this.exchange1Spread.exchange = 'Blockchain'
+          this.spreadOne = convertData(response.data)
+          this.spreadOne.exchange = 'Blockchain'
         })
     },
     getCEXData: function () {
@@ -1450,8 +1394,8 @@ export default {
           }
         }
 
-        this.exchange2Spread = convertData(response.data)
-        this.exchange2Spread.exchange = 'CEX'
+        this.spreadTwo = convertData(response.data)
+        this.spreadTwo.exchange = 'CEX'
       })
     },
     // the below function takes in an array of of array of prices in first position and qty in second
@@ -1527,11 +1471,11 @@ export default {
         series: [
           {
             name: 'Bids',
-            data: [props.exchange1Spread.bid, props.exchange2Spread.bid],
+            data: [props.spreadOne.bid, props.spreadTwo.bid],
           },
           {
             name: 'Asks',
-            data: [props.exchange1Spread.ask, props.exchange2Spread.ask],
+            data: [props.spreadOne.ask, props.spreadTwo.ask],
           },
         ],
         xaxis: {
@@ -1550,10 +1494,7 @@ export default {
           tooltip: {
             enabled: false,
           },
-          categories: [
-            props.exchange1Spread.exchange,
-            props.exchange2Spread.exchange,
-          ],
+          categories: [props.spreadOne.exchange, props.spreadTwo.exchange],
           crosshairs: {
             show: false,
             fill: {
@@ -1582,13 +1523,13 @@ export default {
           //wasted enough time on it already
           min: function () {
             let min = 0
-            props.exchange1Spread.bid <= props.exchange2Spread.bid
+            props.spreadOne.bid <= props.spreadTwo.bid
               ? (min =
-                  props.exchange1Spread.bid -
-                  2 * (props.exchange1Spread.ask - props.exchange1Spread.bid))
+                  props.spreadOne.bid -
+                  2 * (props.spreadOne.ask - props.spreadOne.bid))
               : (min =
-                  props.exchange2Spread.bid -
-                  2 * (props.exchange2Spread.ask - props.exchange2Spread.bid))
+                  props.spreadTwo.bid -
+                  2 * (props.spreadTwo.ask - props.spreadTwo.bid))
             // const length = min.toString().length - 3
             // const powerOf = 10 ** length
             // min = Math.round(min / powerOf) * powerOf
@@ -1596,9 +1537,9 @@ export default {
           },
           max: function () {
             let max
-            props.exchange1Spread.ask >= props.exchange2Spread.ask
-              ? (max = props.exchange1Spread.ask)
-              : (max = props.exchange2Spread.ask)
+            props.spreadOne.ask >= props.spreadTwo.ask
+              ? (max = props.spreadOne.ask)
+              : (max = props.spreadTwo.ask)
             return max
           },
         },
