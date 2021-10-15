@@ -42,7 +42,8 @@ export default {
 		],
 		script: [
 			{ src: './assets/vendor/feather.min.js', defer: true },
-			{ src: './assets/js/theme.bundle.js', defer: true }
+			{ src: './assets/js/theme.bundle.js', defer: true },
+			{ src: './assets/vendor/apexcharts.min.js', defer: true }
 		]
 	},
 
