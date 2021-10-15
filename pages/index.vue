@@ -1374,148 +1374,258 @@
 
 <script>
 export default {
+  data: function () {
+    return {
+      exchange1Spread: {},
+      exchange2Spread: {},
+      buyOn: '',
+      sellOn: '',
+    }
+  },
   mounted: function () {
     // hard coded feather for now but really needs to be loaded on all pages
     feather.replace()
+    this.getBlockchainData()
+    this.getCEXData()
+
+    setTimeout(() => {
+      this.compareExchanges(this.exchange1Spread, this.exchange2Spread)
+    }, 2000)
+    setTimeout(() => {
+      this.renderBarChart({
+        exchange1Spread: this.exchange1Spread,
+        exchange2Spread: this.exchange2Spread,
+      })
+    }, 5000)
 
     // hard coded apex chart for now but would really like to call it as a component
-    var cPrimary = '#5252F9'
-    var cWarning = '#ffb016'
-    var cSecondary = '#ff4d62'
-    var cSuccess = '#4BC98D'
-    var cMuted = '#a5a5bc'
-    var cBodycolor = '#31314d'
-    var cLight = '#f3f6fb'
-    var cGray = '#e3e7ef'
-    var cFont = 'inherit'
-    new ApexCharts(document.querySelector('#chart-bar'), {
-      chart: {
-        fontFamily: cFont,
-        type: 'bar',
-        height: 350,
-        toolbar: {
-          show: false,
-        },
-      },
-      colors: [cPrimary, cWarning],
-      grid: {
-        borderColor: cMuted,
-        strokeDashArray: 6,
-        padding: {
-          top: 0,
-          right: 20,
-          bottom: -10,
-          left: 20,
-        },
-        xaxis: {
-          lines: {
-            show: true,
-          },
-        },
-        yaxis: {
-          lines: {
+  },
+  methods: {
+    getBlockchainData: function () {
+      this.$axios
+        .get(`https://api.blockchain.com/v3/exchange/l2/BTC-USD`)
+        .then((response) => {
+          console.log('Blockchain data here')
+          const convertData = (data) => {
+            const highestBid = Math.max(...data.bids.map((e) => e.px))
+            const highestBidIndex = data.bids.findIndex(
+              (x) => x.px === highestBid
+            )
+
+            const smallestAsk = Math.min(...data.asks.map((e) => e.px))
+            const smallestAskIndex = data.asks.findIndex(
+              (x) => x.px === smallestAsk
+            )
+
+            return {
+              bid: Math.round(data.bids[highestBidIndex].px),
+              bidQty: data.bids[highestBidIndex].qty,
+              ask: Math.round(data.asks[smallestAskIndex].px),
+              askQty: data.asks[smallestAskIndex].qty,
+            }
+          }
+          this.exchange1Spread = convertData(response.data)
+          this.exchange1Spread.exchange = 'Blockchain'
+        })
+    },
+    getCEXData: function () {
+      this.$axios.get('/getCEXData/').then((response) => {
+        console.log('CEX data here')
+        const convertData = (data) => {
+          const highestBid = Math.max(...data.bids.map((e) => e[0]))
+          const highestBidIndex = data.bids.findIndex(
+            (x) => x[0] === highestBid
+          )
+
+          const smallestAsk = Math.min(...data.asks.map((e) => e[0]))
+          const smallestAskIndex = data.asks.findIndex(
+            (x) => x[0] === smallestAsk
+          )
+
+          return {
+            bid: Math.round(data.bids[highestBidIndex][0]),
+            bidQty: data.bids[highestBidIndex][1],
+            ask: Math.round(data.asks[smallestAskIndex][0]),
+            askQty: data.asks[smallestAskIndex][1],
+          }
+        }
+
+        this.exchange2Spread = convertData(response.data)
+        this.exchange2Spread.exchange = 'CEX'
+      })
+    },
+    // the below function takes in an array of of array of prices in first position and qty in second
+    findHighestAndSmallest: function (data) {
+      const highestBidPrice = Math.max(...data.bids.map((e) => e[0]))
+      const highestBidQty = Math.max(...data.bids.map((e) => e[1]))
+      const smallestAskPrice = Math.min(...data.asks.map((e) => e[0]))
+      const smallestAskQty = Math.min(...data.asks.map((e) => e[1]))
+      return {
+        highestBidPrice: Math.round(highestBidPrice),
+        highestBidQty: highestBidQty,
+        smallestAskPrice: Math.round(smallestAskPrice),
+        smallestAskQty: smallestAskQty,
+      }
+    },
+    compareExchanges: function (exchange1, exchange2) {
+      console.log('comparing data here')
+      if (exchange1.bid > exchange2.bid) {
+        this.buyOn = exchange1.exchange
+      } else if (exchange1.bid < exchange2.bid) {
+        this.buyOn = exchange2.exchange
+      } else {
+        this.buyOn = 'either exchange'
+      }
+      if (exchange1.ask > exchange2.ask) {
+        this.sellOn = exchange1.exchange
+      } else if (exchange1.ask < exchange2.ask) {
+        this.sellOn = exchange2.exchange
+      } else {
+        this.sellOn = 'either exchange'
+      }
+    },
+    renderBarChart: function (props) {
+      var cPrimary = '#5252F9'
+      var cWarning = '#ffb016'
+      var cSecondary = '#ff4d62'
+      var cSuccess = '#4BC98D'
+      var cMuted = '#a5a5bc'
+      var cBodycolor = '#31314d'
+      var cLight = '#f3f6fb'
+      var cGray = '#e3e7ef'
+      var cFont = 'inherit'
+      new ApexCharts(document.querySelector('#chart-bar'), {
+        chart: {
+          fontFamily: cFont,
+          type: 'bar',
+          height: 350,
+          toolbar: {
             show: false,
           },
         },
-      },
-      series: [
-        {
-          name: 'Revenue',
-          data: [5717, 6432, 4214, 5214, 5021, 4212, 6247],
-        },
-        {
-          name: 'Payouts',
-          data: [1134, 1365, 1104, 694, 938, 789, 1061],
-        },
-      ],
-      xaxis: {
-        labels: {
-          style: {
-            colors: cMuted,
-            fontFamily: cFont,
+        colors: [cPrimary, cWarning],
+        grid: {
+          borderColor: cMuted,
+          strokeDashArray: 6,
+          padding: {
+            top: 0,
+            right: 20,
+            bottom: -10,
+            left: 20,
+          },
+          xaxis: {
+            lines: {
+              show: true,
+            },
+          },
+          yaxis: {
+            lines: {
+              show: false,
+            },
           },
         },
-        axisTicks: {
-          show: false,
+        series: [
+          {
+            name: 'Bids',
+            data: [props.exchange1Spread.bid, props.exchange2Spread.bid],
+          },
+          {
+            name: 'Asks',
+            data: [props.exchange1Spread.ask, props.exchange2Spread.ask],
+          },
+        ],
+        xaxis: {
+          labels: {
+            style: {
+              colors: cMuted,
+              fontFamily: cFont,
+            },
+          },
+          axisTicks: {
+            show: false,
+          },
+          axisBorder: {
+            show: false,
+          },
+          tooltip: {
+            enabled: false,
+          },
+          categories: [
+            props.exchange1Spread.exchange,
+            props.exchange2Spread.exchange,
+          ],
+          crosshairs: {
+            show: false,
+            fill: {
+              type: 'solid',
+              color: cPrimary,
+            },
+            stroke: {
+              color: cSecondary,
+              width: 1,
+              dashArray: 6,
+            },
+          },
         },
-        axisBorder: {
+        yaxis: {
+          labels: {
+            style: {
+              colors: cMuted,
+              fontFamily: cFont,
+            },
+          },
+          crosshairs: {
+            show: false,
+          },
+        },
+        plotOptions: {
+          bar: {
+            columnWidth: '40%',
+            borderRadius: 4,
+          },
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
           show: false,
         },
         tooltip: {
-          enabled: false,
+          shared: true,
+          intersect: false,
+          y: [
+            {
+              formatter: function (y) {
+                if (typeof y !== 'undefined') {
+                  return ' $' + y.toFixed(0)
+                }
+                return y
+              },
+            },
+            {
+              formatter: function (y) {
+                if (typeof y !== 'undefined') {
+                  return ' $' + y.toFixed(0)
+                }
+                return y
+              },
+            },
+          ],
         },
-        categories: ['Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat', 'Sun'],
-        crosshairs: {
-          show: false,
-          fill: {
-            type: 'solid',
-            color: cPrimary,
-          },
-          stroke: {
-            color: cSecondary,
-            width: 1,
-            dashArray: 6,
-          },
-        },
-      },
-      yaxis: {
-        labels: {
-          style: {
+        legend: {
+          position: 'top',
+          fontFamily: cFont,
+          labels: {
             colors: cMuted,
-            fontFamily: cFont,
+          },
+          markers: {
+            width: 12,
+            height: 12,
+            radius: 16,
           },
         },
-        crosshairs: {
-          show: false,
-        },
-      },
-      plotOptions: {
-        bar: {
-          columnWidth: '40%',
-          borderRadius: 4,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        show: false,
-      },
-      tooltip: {
-        shared: true,
-        intersect: false,
-        y: [
-          {
-            formatter: function (y) {
-              if (typeof y !== 'undefined') {
-                return ' $' + y.toFixed(0)
-              }
-              return y
-            },
-          },
-          {
-            formatter: function (y) {
-              if (typeof y !== 'undefined') {
-                return ' $' + y.toFixed(0)
-              }
-              return y
-            },
-          },
-        ],
-      },
-      legend: {
-        position: 'top',
-        fontFamily: cFont,
-        labels: {
-          colors: cMuted,
-        },
-        markers: {
-          width: 12,
-          height: 12,
-          radius: 16,
-        },
-      },
-    }).render()
+      }).render()
+    },
   },
 }
 </script>
