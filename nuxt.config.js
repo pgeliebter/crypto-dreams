@@ -77,6 +77,10 @@ export default {
 
 	// axios proxy for avoiding cors
 	axios: {
+		baseURL: development
+			? 'http://localhost:3000/'
+			: 'https://https://crypto-dreams-backend.herokuapp.com/',
+
 		proxy: true
 	},
 	// proxy targets for front-end for avoiding cors
