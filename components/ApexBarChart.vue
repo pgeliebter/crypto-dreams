@@ -13,11 +13,12 @@ export default {
     console.log(cee)
     console.log(this.dataProps)
     console.log(this.dataProps.orderBooks[0].orderBook.bids[0].price)
-    // this.ApexBarChart(this.dataProps)
+    this.ApexBarChart(this.dataProps)
   },
   props: { dataProps: Object },
   methods: {
     ApexBarChart: function (dataProps) {
+      /* */
       const cPrimary = '#5252F9'
       const cWarning = '#ffb016'
       const cSecondary = '#ff4d62'
@@ -110,27 +111,24 @@ export default {
           },
           //would love to change these values to be calculation based off min and max
           //wasted enough time on it already
-          // min: function () {
-          //   let min = 0
-          //   data.spreadOne.bid <= data.spreadTwo.bid
-          //     ? (min =
-          //         data.spreadOne.bid -
-          //         2 * (data.spreadOne.ask - data.spreadOne.bid))
-          //     : (min =
-          //         data.spreadTwo.bid -
-          //         2 * (data.spreadTwo.ask - data.spreadTwo.bid))
-          //   // const length = min.toString().length - 3
-          //   // const powerOf = 10 ** length
-          //   // min = Math.round(min / powerOf) * powerOf
-          //   return min
-          // },
-          // max: function () {
-          //   let max
-          //   data.spreadOne.ask >= data.spreadTwo.ask
-          //     ? (max = data.spreadOne.ask)
-          //     : (max = data.spreadTwo.ask)
-          //   return max
-          // },
+          min: function () {
+            let array = dataProps.orderBooks.map(
+              (x) => x.orderBook.bids[0].price
+            )
+
+            const min = Math.min(...array)
+            // const length = min.toString().length - 3
+            // const powerOf = 10 ** length
+            // min = Math.round(min / powerOf) * powerOf
+            return min
+          },
+          max: function () {
+            let array = dataProps.orderBooks.map(
+              (x) => x.orderBook.asks[0].price
+            )
+            const max = Math.max(...array)
+            return max
+          },
         },
         plotOptions: {
           bar: {
@@ -182,13 +180,13 @@ export default {
       }).render()
     },
   },
-  metaInfo() {
-    return {
-      title: this.title,
-      meta: [
-        { vmid: 'description', name: 'description', content: this.description },
-      ],
-    }
-  },
+  // metaInfo() {
+  //   return {
+  //     title: this.title,
+  //     meta: [
+  //       { vmid: 'description', name: 'description', content: this.description },
+  //     ],
+  //   }
+  // },
 }
 </script>

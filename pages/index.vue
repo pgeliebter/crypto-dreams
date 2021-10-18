@@ -1347,10 +1347,7 @@ export default {
               ],
             },
           },
-          {
-            exchange: 'Binance',
-            orderBook: null,
-          },
+
           {
             exchange: 'CoinbasePro',
             orderBook: {
@@ -1368,22 +1365,7 @@ export default {
               ],
             },
           },
-          {
-            exchange: 'Kraken',
-            orderBook: null,
-          },
-          {
-            exchange: 'Kucoin',
-            orderBook: null,
-          },
-          {
-            exchange: 'Poloniex',
-            orderBook: null,
-          },
-          {
-            exchange: 'Bibox',
-            orderBook: null,
-          },
+
           {
             exchange: 'Gemini',
             orderBook: {
@@ -1401,14 +1383,7 @@ export default {
               ],
             },
           },
-          {
-            exchange: 'HuobiGlobal',
-            orderBook: null,
-          },
-          {
-            exchange: 'BitMart',
-            orderBook: null,
-          },
+
           {
             exchange: 'HitBtc',
             orderBook: {
@@ -1493,10 +1468,6 @@ export default {
                 },
               ],
             },
-          },
-          {
-            exchange: 'Okex',
-            orderBook: null,
           },
           {
             exchange: 'FtxUS',
