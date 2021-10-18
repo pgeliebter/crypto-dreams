@@ -1321,9 +1321,6 @@
 export default {
   data: function () {
     return {
-      spreadOne: {},
-      spreadTwo: {},
-      sayHi: 'hi',
       buyOn: '',
       sellOn: '',
       exchangesSpreads: {
