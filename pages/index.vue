@@ -1527,30 +1527,7 @@ export default {
   mounted: function () {
     // hard coded feather for now but really needs to be loaded on all pages
     feather.replace()
-    // this.getBlockchainData()
-    // this.getCEXData()
-
-    // setTimeout(() => {
-    //   this.compareExchanges(this.spreadOne, this.spreadTwo)
-    // }, 2000)
-
-    // adding get call to backend
-    // this.$axios
-    //   .get('http://localhost:3000/spreads')
-    //   .then((response) => {
-    //     console.log(response.status, response.data[0])
-    //     this.exchangesSpreads = response.data[0]
-    //     console.log(this.exchangesSpreads)
-    //   })
-    //   .catch((error) => console.log(error))
-    setTimeout(() => {
-      this.renderBarChart(this.exchangesSpreads)
-    }, 2000)
   },
-  methods: {
-    renderBarChart: function (props) {
-      // hard coded apex chart for now but would really like to call it as a component
-    },
-  },
+  methods: {},
 }
 </script>
