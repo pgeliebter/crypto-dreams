@@ -22,6 +22,10 @@ export default {
 				href: '/favicon.ico'
 			},
 			{
+				rel: 'stylesheet',
+				href: '/assets/fonts/bootstrap-icons/bootstrap-icons.css'
+			},
+			{
 				rel: 'preconnect',
 				href: 'https://fonts.googleapis.com'
 			},
@@ -37,10 +41,6 @@ export default {
 			},
 			{
 				rel: 'stylesheet',
-				href: '/assets/fonts/bootstrap-icons/bootstrap-icons.css'
-			},
-			{
-				rel: 'stylesheet',
 				href: '/assets/vendor/css/simplebar.min.css'
 			},
 			{
@@ -53,9 +53,9 @@ export default {
 			}
 		],
 		script: [
-			{ src: '/assets/vendor/feather.min.js', defer: true },
-			{ src: '/assets/js/theme.bundle.js', defer: true },
-			{ src: '/assets/vendor/apexcharts.min.js', defer: true }
+			{ src: '/assets/vendor/feather.min.js', body: true },
+			// 	{ src: '/assets/js/theme.bundle.js', body: true },
+			{ src: '/assets/vendor/apexcharts.min.js', body: true }
 		]
 	},
 

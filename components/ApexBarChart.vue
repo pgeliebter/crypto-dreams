@@ -10,9 +10,7 @@ export default {
   },
   mounted: function () {
     const cee = this.dataProps.orderBooks.map((e) => e.orderBook)
-    console.log(cee)
-    console.log(this.dataProps)
-    console.log(this.dataProps.orderBooks[0].orderBook.bids[0].price)
+
     this.ApexBarChart(this.dataProps)
   },
   props: { dataProps: Object },
