@@ -29,7 +29,7 @@ export default {
         chart: {
           fontFamily: cFont,
           type: 'bar',
-          // height: 350,
+          height: 400,
           toolbar: {
             show: false,
           },

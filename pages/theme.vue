@@ -193,7 +193,15 @@
 
           <!--//Page content//-->
           <div
-            class="content pb-0 p-4 d-flex flex-column-fluid position-relative"
+            class="
+              content
+              pb-0
+              p-4
+              d-flex
+              flex-column-fluid
+              position-relative
+              h-150
+            "
           >
             <div class="container-fluid px-0">
               <div class="row">
@@ -266,9 +274,9 @@
                       "
                     >
                       <h6>Buy on</h6>
-                      <h3>{{ buyInfo.exchange }} for {{ buyInfo.price }}</h3>
+                      <h3>{{ buyInfo.exchange }} for ${{ buyInfo.price }}</h3>
                       <h6>Sell on</h6>
-                      <h3>{{ sellInfo.exchange }} for {{ sellInfo.price }}</h3>
+                      <h3>{{ sellInfo.exchange }} for ${{ sellInfo.price }}</h3>
                     </div>
                   </div>
                 </div>
@@ -433,28 +441,22 @@ export default {
   },
 
   mounted: function () {
-    // hard coded feather for now but really needs to be loaded on all pages
-    feather.replace()
-
     this.getSpreadData()
-
-    //   this.exchangesSpreads = response
-    //   this.readyBarChart = true
-    // })
   },
   methods: {
-    setBuyOnAndSellOn: function () {
-      let buyPrice = this.exchangesSpreads.orderBooks[0].orderBook.bids[0].price
+    setBuyOnAndSellOn: function (exchangesSpreads) {
+      let buyPrice = exchangesSpreads.orderBooks[0].orderBook.bids[0].price
       let sellPrice = 0
       let buyExchange = ''
       let sellExchange = ''
-      this.exchangesSpreads.orderBooks.forEach((book, index, array) => {
-        if (book.orderBook.bids[0].price < buyPrice) {
-          buyPrice = `$${Math.round(book.orderBook.bids[0].price)}`
+      exchangesSpreads.orderBooks.forEach((book, index, array) => {
+        console.log(book.orderBook.bids[0].price, buyPrice)
+        if (book.orderBook.bids[0].price <= buyPrice) {
+          buyPrice = Math.round(book.orderBook.bids[0].price)
           buyExchange = book.exchange
         }
-        if (book.orderBook.asks[0].price > sellPrice) {
-          sellPrice = `$${Math.round(book.orderBook.asks[0].price)}`
+        if (book.orderBook.asks[0].price >= sellPrice) {
+          sellPrice = Math.round(book.orderBook.asks[0].price)
           sellExchange = book.exchange
         }
       })
@@ -465,7 +467,7 @@ export default {
       this.$axios.get('http://localhost:3000/spreads').then((response) => {
         this.exchangesSpreads = response.data[0]
         console.log(response.status, response.data[0])
-        this.setBuyOnAndSellOn()
+        this.setBuyOnAndSellOn(response.data[0])
         this.rerenderData += 1
       })
     },
