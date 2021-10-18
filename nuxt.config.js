@@ -73,28 +73,14 @@ export default {
 	buildModules: [],
 
 	// Modules: https://go.nuxtjs.dev/config-modules
-	modules: [ '@nuxtjs/axios', '@nuxtjs/proxy' ],
+	modules: [ '@nuxtjs/axios' ],
 
 	// axios proxy for avoiding cors
 	axios: {
-		baseURL: development
-			? 'http://localhost:3000/'
-			: 'https://https://crypto-dreams-backend.herokuapp.com/',
-
-		proxy: true
-	},
-	// proxy targets for front-end for avoiding cors
-	proxy: {
-		'/getFTXData/': {
-			target: 'https://ftx.com/api/markets/BTC/USD/orderbook',
-			pathRewrite: { '^/getFTXData/': '' },
-			changeOrigin: true
-		},
-		'/getCEXData/': {
-			target: 'https://cex.io/api/order_book/BTC/USD/',
-			pathRewrite: { '^/getCEXData/': '' },
-			changeOrigin: true
-		}
+		baseURL:
+			process.env.NODE_ENV == 'development'
+				? 'http://localhost:3000'
+				: 'https://crypto-dreams-backend.herokuapp.com'
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build

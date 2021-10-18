@@ -450,7 +450,6 @@ export default {
       let buyExchange = ''
       let sellExchange = ''
       exchangesSpreads.orderBooks.forEach((book, index, array) => {
-        console.log(book.orderBook.bids[0].price, buyPrice)
         if (book.orderBook.bids[0].price <= buyPrice) {
           buyPrice = Math.round(book.orderBook.bids[0].price)
           buyExchange = book.exchange
@@ -464,7 +463,7 @@ export default {
       this.sellInfo = { price: sellPrice, exchange: sellExchange }
     },
     getSpreadData: function () {
-      this.$axios.get('spreads').then((response) => {
+      this.$axios.get('/spreads').then((response) => {
         this.exchangesSpreads = response.data[0]
         console.log(response.status, response.data[0])
         this.setBuyOnAndSellOn(response.data[0])
