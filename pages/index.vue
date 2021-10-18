@@ -925,9 +925,9 @@
                       "
                     >
                       <h6>Buy on</h6>
-                      <h3>{{ buyOn }}</h3>
+                      <h3>{{ buyInfo.exchange }} for {{ buyInfo.price }}</h3>
                       <h6>Sell on</h6>
-                      <h3>{{ sellOn }}</h3>
+                      <h3>{{ sellInfo.exchange }} for {{ sellInfo.price }}</h3>
                     </div>
                   </div>
                 </div>
@@ -1321,8 +1321,8 @@
 export default {
   data: function () {
     return {
-      buyOn: '',
-      sellOn: '',
+      buyInfo: { price: 0, exchange: '' },
+      sellInfo: { price: 0, exchange: '' },
       exchangesSpreads: {
         quoteSymbol: 'USD',
         baseSymbol: 'BTC',
@@ -1519,12 +1519,154 @@ export default {
           },
         ],
       },
+      exchangeInfo: [
+        {
+          exchange: 'binance',
+          bestCaseFee: 0.00015,
+          worstCaseFee: 0.001,
+          icon: 'https://assets.shrimpy.io/exchanges/binance.png',
+        },
+        {
+          exchange: 'binanceus',
+          bestCaseFee: 0.001,
+          worstCaseFee: 0.001,
+          icon: 'https://assets.shrimpy.io/exchanges/binanceus.png',
+        },
+        {
+          exchange: 'bittrex',
+          bestCaseFee: 0,
+          worstCaseFee: 0.0025,
+          icon: 'https://assets.shrimpy.io/exchanges/bittrex.png',
+        },
+        {
+          exchange: 'bittrexinternational',
+          bestCaseFee: 0,
+          worstCaseFee: 0.0025,
+          icon: 'https://assets.shrimpy.io/exchanges/bittrexinternational.png',
+        },
+        {
+          exchange: 'kucoin',
+          bestCaseFee: 0.000125,
+          worstCaseFee: 0.001,
+          icon: 'https://assets.shrimpy.io/exchanges/kucoin.png',
+        },
+        {
+          exchange: 'coinbasepro',
+          bestCaseFee: 0,
+          worstCaseFee: 0.003,
+          icon: 'https://assets.shrimpy.io/exchanges/coinbasepro.png',
+        },
+        {
+          exchange: 'poloniex',
+          bestCaseFee: 0,
+          worstCaseFee: 0.0025,
+          icon: 'https://assets.shrimpy.io/exchanges/poloniex.png',
+        },
+        {
+          exchange: 'kraken',
+          bestCaseFee: 0,
+          worstCaseFee: 0.0026,
+          icon: 'https://assets.shrimpy.io/exchanges/kraken.png',
+        },
+        {
+          exchange: 'bibox',
+          bestCaseFee: 0.0005,
+          worstCaseFee: 0.001,
+          icon: 'https://assets.shrimpy.io/exchanges/bibox.png',
+        },
+        {
+          exchange: 'gemini',
+          bestCaseFee: 0,
+          worstCaseFee: 0.0035,
+          icon: 'https://assets.shrimpy.io/exchanges/gemini.png',
+        },
+        {
+          exchange: 'huobiglobal',
+          bestCaseFee: 0.00015,
+          worstCaseFee: 0.002,
+          icon: 'https://assets.shrimpy.io/exchanges/huobiglobal.png',
+        },
+        {
+          exchange: 'hitbtc',
+          bestCaseFee: -0.001,
+          worstCaseFee: 0.002,
+          icon: 'https://assets.shrimpy.io/exchanges/hitbtc.png',
+        },
+        {
+          exchange: 'bitmart',
+          bestCaseFee: 0.00015,
+          worstCaseFee: 0.002,
+          icon: 'https://assets.shrimpy.io/exchanges/bitmart.png',
+        },
+        {
+          exchange: 'bitstamp',
+          bestCaseFee: 0,
+          worstCaseFee: 0.005,
+          icon: 'https://assets.shrimpy.io/exchanges/bitstamp.png',
+        },
+        {
+          exchange: 'okex',
+          bestCaseFee: -0.0001,
+          worstCaseFee: 0.0015,
+          icon: 'https://assets.shrimpy.io/exchanges/okex.png',
+        },
+        {
+          exchange: 'bitfinex',
+          bestCaseFee: 0,
+          worstCaseFee: 0.002,
+          icon: 'https://assets.shrimpy.io/exchanges/bitfinex.png',
+        },
+        {
+          exchange: 'ftxus',
+          bestCaseFee: 0,
+          worstCaseFee: 0.004,
+          icon: 'https://assets.shrimpy.io/exchanges/ftxus.png',
+        },
+        {
+          exchange: 'ftx',
+          bestCaseFee: 0,
+          worstCaseFee: 0.0007,
+          icon: 'https://assets.shrimpy.io/exchanges/ftx.png',
+        },
+        {
+          exchange: 'cexio',
+          bestCaseFee: 0,
+          worstCaseFee: 0.004,
+          icon: 'https://assets.shrimpy.io/exchanges/cexio.png',
+        },
+        {
+          exchange: 'gateio',
+          bestCaseFee: 0,
+          worstCaseFee: 0.002,
+          icon: 'https://assets.shrimpy.io/exchanges/gateio.png',
+        },
+      ],
     }
   },
   mounted: function () {
     // hard coded feather for now but really needs to be loaded on all pages
     feather.replace()
+    this.setBuyOnAndSellOn()
   },
-  methods: {},
+  methods: {
+    setBuyOnAndSellOn: function () {
+      let buyPrice = this.exchangesSpreads.orderBooks[0].orderBook.bids[0].price
+      let sellPrice = 0
+      let buyExchange = ''
+      let sellExchange = ''
+      this.exchangesSpreads.orderBooks.forEach((book, index, array) => {
+        if (book.orderBook.bids[0].price < buyPrice) {
+          buyPrice = `$${Math.round(book.orderBook.bids[0].price)}`
+          buyExchange = book.exchange
+        }
+        if (book.orderBook.asks[0].price > sellPrice) {
+          sellPrice = `$${Math.round(book.orderBook.asks[0].price)}`
+          sellExchange = book.exchange
+        }
+      })
+      this.buyInfo = { price: buyPrice, exchange: buyExchange }
+      this.sellInfo = { price: sellPrice, exchange: sellExchange }
+    },
+  },
 }
 </script>
