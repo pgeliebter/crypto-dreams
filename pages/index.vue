@@ -197,7 +197,7 @@
                       <h6 class="pe-3 mb-0">Bid - Ask spread for BTC in USD</h6>
 
                       <button
-                        @click="getSpreadData()"
+                        @click="getSpreadData('BTC')"
                         type="button"
                         class="
                           ms-auto
@@ -214,9 +214,10 @@
                     </div>
                     <div class="card-body ps-0">
                       <ApexBarChart
-                        v-if="rerenderData > 0"
+                        :id="'btcChart'"
+                        v-if="btcRenderData > 0"
                         :data-props="exchangesSpreads"
-                        :key="rerenderData"
+                        :key="btcRenderData"
                       />
                     </div>
                   </div>
@@ -244,9 +245,83 @@
                       "
                     >
                       <h4>Buy on</h4>
-                      <h3>{{ buyInfo.exchange }} for ${{ buyInfo.price }}</h3>
+                      <h3>
+                        {{ buyInfo.btc.exchange }} for ${{ buyInfo.btc.price }}
+                      </h3>
                       <h4>Sell on</h4>
-                      <h3>{{ sellInfo.exchange }} for ${{ sellInfo.price }}</h3>
+                      <h3>
+                        {{ sellInfo.btc.exchange }} for ${{
+                          sellInfo.btc.price
+                        }}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-5 col-xl-4 mb-4">
+                  <div class="card h-100 overflow-hidden">
+                    <div
+                      class="
+                        d-flex
+                        card-header
+                        justify-content-between
+                        align-items-center
+                      "
+                    >
+                      <h6 class="pe-3 mb-0">Recommendations</h6>
+                      <!--Select Period of data showing-->
+                    </div>
+                    <div
+                      class="
+                        card-body
+                        d-flex
+                        align-items-center
+                        justify-content-around
+                        flex-column
+                      "
+                    >
+                      <h4>Buy on</h4>
+                      <h3>
+                        {{ buyInfo.eth.exchange }} for ${{ buyInfo.eth.price }}
+                      </h3>
+                      <h4>Sell on</h4>
+                      <h3>
+                        {{ sellInfo.eth.exchange }} for ${{
+                          sellInfo.eth.price
+                        }}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-7 col-xl-8 mb-4">
+                  <div class="card h-100">
+                    <div class="d-flex card-header align-items-center">
+                      <h6 class="pe-3 mb-0">Bid - Ask spread for ETH in USD</h6>
+
+                      <button
+                        @click="getSpreadData('ETH')"
+                        type="button"
+                        class="
+                          ms-auto
+                          flex-shrink-1
+                          btn btn-sm btn-outline-primary
+                        "
+                      >
+                        Refresh
+                        <i
+                          class="fe-1x ms-1 align-middle"
+                          data-feather="refresh-cw"
+                        ></i>
+                      </button>
+                    </div>
+                    <div class="card-body ps-0">
+                      <ApexBarChart
+                        :id="`ethChart`"
+                        v-if="ethRenderData > 0"
+                        :data-props="exchangesSpreads"
+                        :key="ethRenderData"
+                      />
                     </div>
                   </div>
                 </div>
@@ -280,9 +355,16 @@
 export default {
   data: function () {
     return {
-      rerenderData: 0,
-      buyInfo: { price: 0, exchange: '' },
-      sellInfo: { price: 0, exchange: '' },
+      btcRenderData: 0,
+      ethRenderData: 0,
+      buyInfo: {
+        btc: { price: 0, exchange: '' },
+        eth: { price: 0, exchange: '' },
+      },
+      sellInfo: {
+        btc: { price: 0, exchange: '' },
+        eth: { price: 0, exchange: '' },
+      },
       selectedCrypto: '',
       exchangesSpreads: {},
       exchangeInfo: [
@@ -411,7 +493,8 @@ export default {
   },
 
   mounted: function () {
-    this.getSpreadData()
+    this.getSpreadData('BTC')
+    this.getSpreadData('ETH')
   },
   methods: {
     setBuyOnAndSellOn: function (exchangesSpreads) {
@@ -429,15 +512,21 @@ export default {
           sellExchange = book.exchange
         }
       })
-      this.buyInfo = { price: buyPrice, exchange: buyExchange }
-      this.sellInfo = { price: sellPrice, exchange: sellExchange }
+      this.buyInfo[exchangesSpreads.baseSymbol.toLowerCase()] = {
+        price: buyPrice,
+        exchange: buyExchange,
+      }
+      this.sellInfo[exchangesSpreads.baseSymbol.toLowerCase()] = {
+        price: sellPrice,
+        exchange: sellExchange,
+      }
     },
-    getSpreadData: function () {
-      this.$axios.get('/spreads').then((response) => {
+    getSpreadData: function (params) {
+      this.$axios.get(`/spreads/${params}`).then((response) => {
         this.exchangesSpreads = response.data[0]
         console.log(response.status, response.data[0])
         this.setBuyOnAndSellOn(response.data[0])
-        this.rerenderData += 1
+        this[`${params.toLowerCase()}RenderData`] += 1
       })
     },
   },

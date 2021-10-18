@@ -1,11 +1,11 @@
  <template>
-  <div id="chart-bar"></div>
+  <div :id="id"></div>
 </template>
  <script>
 export default {
   data: function () {
     return {
-      barChartData: { data: this.dataProps },
+      barChartData: { data: this.dataProps, id: this.id },
     }
   },
   mounted: function () {
@@ -13,7 +13,7 @@ export default {
 
     this.ApexBarChart(this.dataProps)
   },
-  props: { dataProps: Object },
+  props: { dataProps: Object, id: String },
   methods: {
     ApexBarChart: function (dataProps) {
       const cPrimary = '#5252F9'
@@ -25,7 +25,7 @@ export default {
       const cLight = '#f3f6fb'
       const cGray = '#e3e7ef'
       const cFont = 'inherit'
-      new ApexCharts(document.querySelector('#chart-bar'), {
+      new ApexCharts(document.querySelector(`#${this.id}`), {
         chart: {
           fontFamily: cFont,
           type: 'bar',
