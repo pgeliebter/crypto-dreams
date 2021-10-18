@@ -31,7 +31,7 @@ export default {
         chart: {
           fontFamily: cFont,
           type: 'bar',
-          height: 350,
+          // height: 350,
           toolbar: {
             show: false,
           },
@@ -108,6 +108,8 @@ export default {
           crosshairs: {
             show: false,
           },
+          forceNiceScale: true,
+          decimalsInFloat: 0,
 
           min: function () {
             //  function to return the largest spread to calculate min later value
@@ -157,6 +159,7 @@ export default {
         tooltip: {
           shared: true,
           intersect: false,
+          inverseOrder: true,
           y: [
             {
               formatter: function (y) {
