@@ -823,8 +823,9 @@
                       "
                     >
                       <h6 class="mb-0 pe-3 text-white">
-                        Bid - Ask spread for {{ spreadOne.exchange }} and
-                        {{ spreadTwo.exchange }}
+                        Bid - Ask spreads for
+                        {{ exchangesSpreads.baseSymbol }} -
+                        {{ exchangesSpreads.quoteSymbol }}
                       </h6>
                       <!--Dropdown-->
                       <div class="dropdown">
@@ -858,7 +859,7 @@
                     </div>
                     <!--Apex chart for Overview-->
                     <div class="card-body px-0 pb-0">
-                      <div id="chart-bar"></div>
+                      <ApexBarChart :data-props="exchangesSpreads" />
                     </div>
                   </div>
                 </div>
@@ -1322,276 +1323,262 @@ export default {
     return {
       spreadOne: {},
       spreadTwo: {},
+      sayHi: 'hi',
       buyOn: '',
       sellOn: '',
+      exchangesSpreads: {
+        quoteSymbol: 'USD',
+        baseSymbol: 'BTC',
+        orderBooks: [
+          {
+            exchange: 'Bittrex',
+            orderBook: {
+              asks: [
+                {
+                  price: '61359.99400000',
+                  quantity: '0.04888541',
+                },
+              ],
+              bids: [
+                {
+                  price: '61348.58300000',
+                  quantity: '0.12220842',
+                },
+              ],
+            },
+          },
+          {
+            exchange: 'Binance',
+            orderBook: null,
+          },
+          {
+            exchange: 'CoinbasePro',
+            orderBook: {
+              asks: [
+                {
+                  price: '61365.92',
+                  quantity: '0.06774309',
+                },
+              ],
+              bids: [
+                {
+                  price: '61364.55',
+                  quantity: '0.03049397',
+                },
+              ],
+            },
+          },
+          {
+            exchange: 'Kraken',
+            orderBook: null,
+          },
+          {
+            exchange: 'Kucoin',
+            orderBook: null,
+          },
+          {
+            exchange: 'Poloniex',
+            orderBook: null,
+          },
+          {
+            exchange: 'Bibox',
+            orderBook: null,
+          },
+          {
+            exchange: 'Gemini',
+            orderBook: {
+              asks: [
+                {
+                  price: '61368.89',
+                  quantity: '0.00075102',
+                },
+              ],
+              bids: [
+                {
+                  price: '61364.38',
+                  quantity: '0.00007203',
+                },
+              ],
+            },
+          },
+          {
+            exchange: 'HuobiGlobal',
+            orderBook: null,
+          },
+          {
+            exchange: 'BitMart',
+            orderBook: null,
+          },
+          {
+            exchange: 'HitBtc',
+            orderBook: {
+              asks: [
+                {
+                  price: '61376.31',
+                  quantity: '0.13019',
+                },
+              ],
+              bids: [
+                {
+                  price: '61373.22',
+                  quantity: '0.12653',
+                },
+              ],
+            },
+          },
+          {
+            exchange: 'BinanceUS',
+            orderBook: {
+              asks: [
+                {
+                  price: '61365.8600',
+                  quantity: '0.95000000',
+                },
+              ],
+              bids: [
+                {
+                  price: '61350.3000',
+                  quantity: '0.19000000',
+                },
+              ],
+            },
+          },
+          {
+            exchange: 'BittrexInternational',
+            orderBook: {
+              asks: [
+                {
+                  price: '61359.99400000',
+                  quantity: '0.04888541',
+                },
+              ],
+              bids: [
+                {
+                  price: '61348.58300000',
+                  quantity: '0.12220842',
+                },
+              ],
+            },
+          },
+          {
+            exchange: 'Bitfinex',
+            orderBook: {
+              asks: [
+                {
+                  price: '61330',
+                  quantity: '0.01962297',
+                },
+              ],
+              bids: [
+                {
+                  price: '61329',
+                  quantity: '1.87925516',
+                },
+              ],
+            },
+          },
+          {
+            exchange: 'Bitstamp',
+            orderBook: {
+              asks: [
+                {
+                  price: '61371.37',
+                  quantity: '0.23073992',
+                },
+              ],
+              bids: [
+                {
+                  price: '61346.64',
+                  quantity: '0.19000000',
+                },
+              ],
+            },
+          },
+          {
+            exchange: 'Okex',
+            orderBook: null,
+          },
+          {
+            exchange: 'FtxUS',
+            orderBook: {
+              asks: [
+                {
+                  price: '61371',
+                  quantity: '0.57',
+                },
+              ],
+              bids: [
+                {
+                  price: '61370',
+                  quantity: '0.57',
+                },
+              ],
+            },
+          },
+          {
+            exchange: 'Ftx',
+            orderBook: {
+              asks: [
+                {
+                  price: '61372',
+                  quantity: '0.9912',
+                },
+              ],
+              bids: [
+                {
+                  price: '61371',
+                  quantity: '3.3157',
+                },
+              ],
+            },
+          },
+          {
+            exchange: 'GateIO',
+            orderBook: {
+              asks: [
+                {
+                  price: '61391.08',
+                  quantity: '0.0308',
+                },
+              ],
+              bids: [
+                {
+                  price: '61345.21',
+                  quantity: '0.0308',
+                },
+              ],
+            },
+          },
+        ],
+      },
     }
   },
   mounted: function () {
     // hard coded feather for now but really needs to be loaded on all pages
     feather.replace()
-    this.getBlockchainData()
-    this.getCEXData()
+    // this.getBlockchainData()
+    // this.getCEXData()
 
+    // setTimeout(() => {
+    //   this.compareExchanges(this.spreadOne, this.spreadTwo)
+    // }, 2000)
+
+    // adding get call to backend
+    // this.$axios
+    //   .get('http://localhost:3000/spreads')
+    //   .then((response) => {
+    //     console.log(response.status, response.data[0])
+    //     this.exchangesSpreads = response.data[0]
+    //     console.log(this.exchangesSpreads)
+    //   })
+    //   .catch((error) => console.log(error))
     setTimeout(() => {
-      this.compareExchanges(this.spreadOne, this.spreadTwo)
+      this.renderBarChart(this.exchangesSpreads)
     }, 2000)
-    setTimeout(() => {
-      this.renderBarChart({
-        spreadOne: this.spreadOne,
-        spreadTwo: this.spreadTwo,
-      })
-    }, 5000)
-
-    // hard coded apex chart for now but would really like to call it as a component
   },
   methods: {
-    getBlockchainData: function () {
-      this.$axios
-        .get(`https://api.blockchain.com/v3/exchange/l2/BTC-USD`)
-        .then((response) => {
-          console.log('Blockchain data here')
-          const convertData = (data) => {
-            const highestBid = Math.max(...data.bids.map((e) => e.px))
-            const highestBidIndex = data.bids.findIndex(
-              (x) => x.px === highestBid
-            )
-
-            const smallestAsk = Math.min(...data.asks.map((e) => e.px))
-            const smallestAskIndex = data.asks.findIndex(
-              (x) => x.px === smallestAsk
-            )
-
-            return {
-              bid: Math.round(data.bids[highestBidIndex].px),
-              bidQty: data.bids[highestBidIndex].qty,
-              ask: Math.round(data.asks[smallestAskIndex].px),
-              askQty: data.asks[smallestAskIndex].qty,
-            }
-          }
-          this.spreadOne = convertData(response.data)
-          this.spreadOne.exchange = 'Blockchain'
-        })
-    },
-    getCEXData: function () {
-      this.$axios.get('/getCEXData/').then((response) => {
-        console.log('CEX data here')
-        const convertData = (data) => {
-          const highestBid = Math.max(...data.bids.map((e) => e[0]))
-          const highestBidIndex = data.bids.findIndex(
-            (x) => x[0] === highestBid
-          )
-
-          const smallestAsk = Math.min(...data.asks.map((e) => e[0]))
-          const smallestAskIndex = data.asks.findIndex(
-            (x) => x[0] === smallestAsk
-          )
-
-          return {
-            bid: Math.round(data.bids[highestBidIndex][0]),
-            bidQty: data.bids[highestBidIndex][1],
-            ask: Math.round(data.asks[smallestAskIndex][0]),
-            askQty: data.asks[smallestAskIndex][1],
-          }
-        }
-
-        this.spreadTwo = convertData(response.data)
-        this.spreadTwo.exchange = 'CEX'
-      })
-    },
-    // the below function takes in an array of of array of prices in first position and qty in second
-    findHighestAndSmallest: function (data) {
-      const highestBidPrice = Math.max(...data.bids.map((e) => e[0]))
-      const highestBidQty = Math.max(...data.bids.map((e) => e[1]))
-      const smallestAskPrice = Math.min(...data.asks.map((e) => e[0]))
-      const smallestAskQty = Math.min(...data.asks.map((e) => e[1]))
-      return {
-        highestBidPrice: Math.round(highestBidPrice),
-        highestBidQty: highestBidQty,
-        smallestAskPrice: Math.round(smallestAskPrice),
-        smallestAskQty: smallestAskQty,
-      }
-    },
-    compareExchanges: function (exchange1, exchange2) {
-      console.log('comparing data here')
-      if (exchange1.bid > exchange2.bid) {
-        this.buyOn = exchange1.exchange
-      } else if (exchange1.bid < exchange2.bid) {
-        this.buyOn = exchange2.exchange
-      } else {
-        this.buyOn = 'either exchange'
-      }
-      if (exchange1.ask > exchange2.ask) {
-        this.sellOn = exchange1.exchange
-      } else if (exchange1.ask < exchange2.ask) {
-        this.sellOn = exchange2.exchange
-      } else {
-        this.sellOn = 'either exchange'
-      }
-    },
     renderBarChart: function (props) {
-      var cPrimary = '#5252F9'
-      var cWarning = '#ffb016'
-      var cSecondary = '#ff4d62'
-      var cSuccess = '#4BC98D'
-      var cMuted = '#a5a5bc'
-      var cBodycolor = '#31314d'
-      var cLight = '#f3f6fb'
-      var cGray = '#e3e7ef'
-      var cFont = 'inherit'
-      new ApexCharts(document.querySelector('#chart-bar'), {
-        chart: {
-          fontFamily: cFont,
-          type: 'bar',
-          height: 350,
-          toolbar: {
-            show: false,
-          },
-        },
-        colors: [cPrimary, cWarning],
-        grid: {
-          borderColor: cMuted,
-          strokeDashArray: 6,
-          padding: {
-            top: 0,
-            right: 20,
-            bottom: -10,
-            left: 20,
-          },
-          xaxis: {
-            lines: {
-              show: true,
-            },
-          },
-          yaxis: {
-            lines: {
-              show: false,
-            },
-          },
-        },
-        series: [
-          {
-            name: 'Bids',
-            data: [props.spreadOne.bid, props.spreadTwo.bid],
-          },
-          {
-            name: 'Asks',
-            data: [props.spreadOne.ask, props.spreadTwo.ask],
-          },
-        ],
-        xaxis: {
-          labels: {
-            style: {
-              colors: cMuted,
-              fontFamily: cFont,
-            },
-          },
-          axisTicks: {
-            show: false,
-          },
-          axisBorder: {
-            show: false,
-          },
-          tooltip: {
-            enabled: false,
-          },
-          categories: [props.spreadOne.exchange, props.spreadTwo.exchange],
-          crosshairs: {
-            show: false,
-            fill: {
-              type: 'solid',
-              color: cPrimary,
-            },
-            stroke: {
-              color: cSecondary,
-              width: 1,
-              dashArray: 6,
-            },
-          },
-        },
-        yaxis: {
-          labels: {
-            show: true,
-            style: {
-              colors: cMuted,
-              fontFamily: cFont,
-            },
-          },
-          crosshairs: {
-            show: false,
-          },
-          //would love to change these values to be calculation based off min and max
-          //wasted enough time on it already
-          min: function () {
-            let min = 0
-            props.spreadOne.bid <= props.spreadTwo.bid
-              ? (min =
-                  props.spreadOne.bid -
-                  2 * (props.spreadOne.ask - props.spreadOne.bid))
-              : (min =
-                  props.spreadTwo.bid -
-                  2 * (props.spreadTwo.ask - props.spreadTwo.bid))
-            // const length = min.toString().length - 3
-            // const powerOf = 10 ** length
-            // min = Math.round(min / powerOf) * powerOf
-            return min
-          },
-          max: function () {
-            let max
-            props.spreadOne.ask >= props.spreadTwo.ask
-              ? (max = props.spreadOne.ask)
-              : (max = props.spreadTwo.ask)
-            return max
-          },
-        },
-        plotOptions: {
-          bar: {
-            columnWidth: '40%',
-            borderRadius: 4,
-            datalabels: { position: 'top' },
-          },
-        },
-        dataLabels: {
-          enabled: false,
-        },
-        stroke: {
-          show: false,
-        },
-        tooltip: {
-          shared: true,
-          intersect: false,
-          y: [
-            {
-              formatter: function (y) {
-                if (typeof y !== 'undefined') {
-                  return ' $' + y.toFixed(0)
-                }
-                return y
-              },
-            },
-            {
-              formatter: function (y) {
-                if (typeof y !== 'undefined') {
-                  return ' $' + y.toFixed(0)
-                }
-                return y
-              },
-            },
-          ],
-        },
-
-        legend: {
-          position: 'top',
-          fontFamily: cFont,
-          labels: {
-            colors: cMuted,
-          },
-          markers: {
-            width: 12,
-            height: 12,
-            radius: 16,
-          },
-        },
-      }).render()
+      // hard coded apex chart for now but would really like to call it as a component
     },
   },
 }
