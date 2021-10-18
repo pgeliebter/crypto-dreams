@@ -18,7 +18,6 @@ export default {
   props: { dataProps: Object },
   methods: {
     ApexBarChart: function (dataProps) {
-      /* */
       const cPrimary = '#5252F9'
       const cWarning = '#ffb016'
       const cSecondary = '#ff4d62'
@@ -49,12 +48,12 @@ export default {
           },
           xaxis: {
             lines: {
-              show: true,
+              show: false,
             },
           },
           yaxis: {
             lines: {
-              show: false,
+              show: true,
             },
           },
         },
@@ -109,30 +108,42 @@ export default {
           crosshairs: {
             show: false,
           },
-          //would love to change these values to be calculation based off min and max
-          //wasted enough time on it already
+
           min: function () {
+            //  function to return the largest spread to calculate min later value
+            function largestSpread(dataProps) {
+              let largestDifference = -1
+              for (let i = 0; i < dataProps.orderBooks.length; i++) {
+                let currentDifference =
+                  dataProps.orderBooks[i].orderBook.asks[0].price -
+                  dataProps.orderBooks[i].orderBook.bids[0].price
+                if (currentDifference > largestDifference) {
+                  largestDifference = currentDifference
+                }
+              }
+              return largestDifference
+            }
+            // map to get min value
             let array = dataProps.orderBooks.map(
               (x) => x.orderBook.bids[0].price
             )
-
-            const min = Math.min(...array)
-            // const length = min.toString().length - 3
-            // const powerOf = 10 ** length
-            // min = Math.round(min / powerOf) * powerOf
-            return min
+            let min = Math.min(...array)
+            // subtracting largest spread from smallest spread to set the min value
+            min = min - largestSpread(dataProps)
+            return Math.round(min)
           },
           max: function () {
+            // map to get max value
             let array = dataProps.orderBooks.map(
               (x) => x.orderBook.asks[0].price
             )
-            const max = Math.max(...array)
-            return max
+            let max = Math.max(...array)
+            return Math.round(max)
           },
         },
         plotOptions: {
           bar: {
-            columnWidth: '40%',
+            columnWidth: '60%',
             borderRadius: 4,
             datalabels: { position: 'top' },
           },
@@ -180,13 +191,5 @@ export default {
       }).render()
     },
   },
-  // metaInfo() {
-  //   return {
-  //     title: this.title,
-  //     meta: [
-  //       { vmid: 'description', name: 'description', content: this.description },
-  //     ],
-  //   }
-  // },
 }
 </script>
