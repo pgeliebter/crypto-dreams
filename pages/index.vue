@@ -1643,10 +1643,16 @@ export default {
       ],
     }
   },
+
   mounted: function () {
     // hard coded feather for now but really needs to be loaded on all pages
     feather.replace()
     this.setBuyOnAndSellOn()
+    // this.$axios.get('http://localhost:3000/spread').then((response) => {
+    //   console.log(response)
+    //   this.exchangesSpreads = response
+    //   this.readyBarChart = true
+    // })
   },
   methods: {
     setBuyOnAndSellOn: function () {
