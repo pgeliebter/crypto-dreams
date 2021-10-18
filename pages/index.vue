@@ -172,20 +172,6 @@
                 <div class="col-md-7 mb-4 mb-md-0">
                   <h3 class="mb-2 mb-0">Welcome to the Spreads page!</h3>
                 </div>
-                <div class="col-md-5">
-                  <nav
-                    aria-label="breadcrumb"
-                    class="d-md-flex justify-content-md-end"
-                  >
-                    <ol class="breadcrumb mb-0">
-                      <li class="breadcrumb-item">
-                        <a href="#!" class="">Home</a>
-                      </li>
-                      <li class="breadcrumb-item active">Dashboard</li>
-                      <li class="breadcrumb-item active">Analytics</li>
-                    </ol>
-                  </nav>
-                </div>
               </div>
             </div>
           </div>
@@ -247,22 +233,6 @@
                     >
                       <h6 class="pe-3 mb-0">Recommendations</h6>
                       <!--Select Period of data showing-->
-                      <div class="width-140">
-                        <select
-                          class="form-control form-control-sm"
-                          data-choices='{"searchEnabled":false}'
-                        >
-                          <option value="Last 7 Days">Last 7 Days</option>
-                          <option value="Last Month">Last Month</option>
-                          <option value="Last 6 Months">Last 6 Months</option>
-                          <option value="Last Year">Last Year</option>
-                          <option value="All Time">All Time</option>
-
-                          <option value="Kenya">Kenya</option>
-                          <option value="Sweden">Sweden</option>
-                          <option value="Germany">Germany</option>
-                        </select>
-                      </div>
                     </div>
                     <div
                       class="
@@ -273,9 +243,9 @@
                         flex-column
                       "
                     >
-                      <h6>Buy on</h6>
+                      <h4>Buy on</h4>
                       <h3>{{ buyInfo.exchange }} for ${{ buyInfo.price }}</h3>
-                      <h6>Sell on</h6>
+                      <h4>Sell on</h4>
                       <h3>{{ sellInfo.exchange }} for ${{ sellInfo.price }}</h3>
                     </div>
                   </div>
@@ -445,17 +415,17 @@ export default {
   },
   methods: {
     setBuyOnAndSellOn: function (exchangesSpreads) {
-      let buyPrice = exchangesSpreads.orderBooks[0].orderBook.bids[0].price
+      let buyPrice = exchangesSpreads.orderBooks[0].orderBook.asks[0].price
       let sellPrice = 0
       let buyExchange = ''
       let sellExchange = ''
-      exchangesSpreads.orderBooks.forEach((book, index, array) => {
-        if (book.orderBook.bids[0].price <= buyPrice) {
-          buyPrice = Math.round(book.orderBook.bids[0].price)
+      exchangesSpreads.orderBooks.forEach((book, index) => {
+        if (book.orderBook.asks[0].price <= buyPrice) {
+          buyPrice = Math.round(book.orderBook.asks[0].price)
           buyExchange = book.exchange
         }
-        if (book.orderBook.asks[0].price >= sellPrice) {
-          sellPrice = Math.round(book.orderBook.asks[0].price)
+        if (book.orderBook.bids[0].price >= sellPrice) {
+          sellPrice = Math.round(book.orderBook.bids[0].price)
           sellExchange = book.exchange
         }
       })
