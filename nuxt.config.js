@@ -4,9 +4,7 @@ export default {
 	generate: {
 		fallback: true
 	},
-	// ssr: process.env.NODE_ENV == 'development' ? true : false,
-	// target: process.env.NODE_ENV == 'development' ? 'static' : 'server',
-	// Global page headers: https://go.nuxtjs.dev/config-head
+
 	head: {
 		title: 'crypto-dreams',
 		htmlAttrs: {
@@ -51,7 +49,8 @@ export default {
 			},
 			{
 				rel: 'stylesheet',
-				href: '/assets/vendor/css/choices.min.css'
+				href: '/assets/vendor/css/choices.min.css',
+				defer: true
 			},
 			{
 				rel: 'stylesheet',
@@ -59,9 +58,14 @@ export default {
 			}
 		],
 		script: [
-			{ src: '/assets/vendor/feather.min.js', body: true },
-			{ src: '/assets/js/theme.bundle.js', body: true },
-			{ src: '/assets/vendor/apexcharts.min.js', body: true }
+			{ src: '/assets/js/theme.bundle.js', defer: true },
+			{ src: '/assets/vendor/feather.min.js', body: true, defer: true },
+
+			{
+				src: '/assets/vendor/apexcharts.min.js',
+				body: true,
+				defer: true
+			}
 		]
 	},
 

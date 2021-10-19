@@ -4,7 +4,6 @@
     <div class="loader">
       <div class="d-flex flex-column flex-root">
         <div class="page d-flex flex-row flex-column-fluid">
-
           <div class="d-flex flex-column flex-row-fluid">
             <div
               class="
@@ -58,258 +57,255 @@
           </div>
         </div>
       </div>
-    </div> 
+    </div>
     <!--////////////////// /.PreLoader END//////////////////////
     <div class="d-flex flex-column flex-root">
       <!--Page-->
-      <div class="page d-flex flex-row flex-column-fluid">
-        <!--///////////Page content wrapper///////////////-->
-        <main class="d-flex flex-column flex-row-fluid">
-          <!--//page-header//-->
-          <header
-            class="navbar py-0 page-header navbar-expand navbar-light px-4"
-          >
-            <ul class="navbar-nav d-flex align-items-center h-100">
-              <!-- this is the four squares which will be used for navigation -->
-              <li
+    <div class="page d-flex flex-row flex-column-fluid">
+      <!--///////////Page content wrapper///////////////-->
+      <main class="d-flex flex-column flex-row-fluid">
+        <!--//page-header//-->
+        <header class="navbar py-0 page-header navbar-expand navbar-light px-4">
+          <ul class="navbar-nav d-flex align-items-center h-100">
+            <!-- this is the four squares which will be used for navigation -->
+            <li
+              class="
+                nav-item
+                d-flex
+                flex-column
+                h-100
+                justify-content-center
+                dropdown
+              "
+            >
+              <a
+                href="#"
+                data-bs-toggle="dropdown"
                 class="
-                  nav-item
+                  hover-bg-primary
+                  nav-link
+                  rounded-circle
+                  size-35
                   d-flex
-                  flex-column
-                  h-100
+                  align-items-center
                   justify-content-center
-                  dropdown
+                  p-0
                 "
               >
-                <a
-                  href="#"
-                  data-bs-toggle="dropdown"
-                  class="
-                    hover-bg-primary
-                    nav-link
-                    rounded-circle
-                    size-35
-                    d-flex
-                    align-items-center
-                    justify-content-center
-                    p-0
-                  "
-                >
-                  <i data-feather="grid" class="fe-1x align-middle"></i>
-                </a>
-                <div class="dropdown-menu overflow-hidden p-0 mt-0">
-                  <div class="row mx-0">
-                    <a
-                      href="#!"
-                      class="
-                        col-6
-                        hover-bg-gray
-                        text-center
-                        p-4
-                        border-bottom border-end
-                      "
-                    >
-                      Spreads
-                      <!-- <img
+                <i data-feather="grid" class="fe-1x align-middle"></i>
+              </a>
+              <div class="dropdown-menu overflow-hidden p-0 mt-0">
+                <div class="row mx-0">
+                  <a
+                    href="#!"
+                    class="
+                      col-6
+                      hover-bg-gray
+                      text-center
+                      p-4
+                      border-bottom border-end
+                    "
+                  >
+                    Spreads
+                    <!-- <img
                         src="assets/media/brand-logos/slack.svg"
                         class="height-30 w-auto"
                         alt=""
                       /> -->
-                    </a>
-                    <a
-                      href="#!"
-                      class="
-                        col-6
-                        hover-bg-gray
-                        text-center
-                        p-4
-                        border-bottom border-end
-                      "
-                    >
-                      Ticker
-                    </a>
-                    <a
-                      href="#!"
-                      class="col-6 hover-bg-gray text-center p-4 border-end"
-                    >
-                      <img
-                        src="assets/media/brand-logos/atlassian.svg"
-                        class="height-30 w-auto"
-                        alt=""
-                      />
-                    </a>
-                    <a href="#!" class="col-6 hover-bg-gray text-center p-4">
-                      <img
-                        src="assets/media/brand-logos/figma.svg"
-                        class="height-30 w-auto"
-                        alt=""
-                      />
-                    </a>
-                  </div>
+                  </a>
+                  <a
+                    href="#!"
+                    class="
+                      col-6
+                      hover-bg-gray
+                      text-center
+                      p-4
+                      border-bottom border-end
+                    "
+                  >
+                    Ticker
+                  </a>
+                  <a
+                    href="#!"
+                    class="col-6 hover-bg-gray text-center p-4 border-end"
+                  >
+                    <img
+                      src="assets/media/brand-logos/atlassian.svg"
+                      class="height-30 w-auto"
+                      alt=""
+                    />
+                  </a>
+                  <a href="#!" class="col-6 hover-bg-gray text-center p-4">
+                    <img
+                      src="assets/media/brand-logos/figma.svg"
+                      class="height-30 w-auto"
+                      alt=""
+                    />
+                  </a>
                 </div>
-              </li>
-            </ul>
-            <ul class="navbar-nav ms-auto d-flex align-items-center h-100">
-              <li
-                class="
-                  nav-item
-                  dropdown
-                  d-flex
-                  align-items-center
-                  justify-content-center
-                  flex-column
-                  h-100
-                  me-lg-1
-                "
-              ></li>
-            </ul>
-          </header>
-          <!--Main Header End-->
+              </div>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto d-flex align-items-center h-100">
+            <li
+              class="
+                nav-item
+                dropdown
+                d-flex
+                align-items-center
+                justify-content-center
+                flex-column
+                h-100
+                me-lg-1
+              "
+            ></li>
+          </ul>
+        </header>
+        <!--Main Header End-->
 
-          <!--//Page Toolbar//-->
-          <div class="toolbar pb-0 p-4">
-            <div class="position-relative container-fluid px-0">
-              <div class="row align-items-center position-relative">
-                <div class="col-md-7 mb-4 mb-md-0">
-                  <h3 class="mb-2 mb-0">Welcome to the Spreads page!</h3>
-                </div>
+        <!--//Page Toolbar//-->
+        <div class="toolbar pb-0 p-4">
+          <div class="position-relative container-fluid px-0">
+            <div class="row align-items-center position-relative">
+              <div class="col-md-7 mb-4 mb-md-0">
+                <h3 class="mb-2 mb-0">Welcome to the Spreads page!</h3>
               </div>
             </div>
           </div>
-          <!--//Page Toolbar End//-->
+        </div>
+        <!--//Page Toolbar End//-->
 
-          <!--//Page content//-->
-          <div
-            class="
-              content
-              pb-0
-              p-4
-              d-flex
-              flex-column-fluid
-              position-relative
-              h-150
-            "
-          >
-            <div class="container-fluid px-9">
-              <div class="row">
-                <div class="col-12 col-lg-7 col-xl-8 mb-4">
-                  <div class="card h-100">
-                    <div class="d-flex card-header align-items-center">
-                      <h6 class="pe-3 mb-0">Bid - Ask for</h6>
-                      <div class="flex-grow-1 ms-auto">
-                          <select
-                            @change="changeBaseSymbol"
-                            id="Searchable"
-                            class="form-control"
-                            data-choices='{"searchEnabled":true}'
-                          >
-                            <option
-                              v-for="crypto in cryptos"
-                              :key="crypto"
-                              :value="crypto"
-                            >
-                              {{ crypto }}
-                            </option>
-                          </select>
-                      </div>
-                      <h6 class="pe-3 mb-0">&nbsp;in&nbsp;</h6>
-                      <div class="flex-grow-1 ms-auto">
-                        <select
-                          @change="changeQuoteSymbol"
-                          id="Searchable"
-                          class="form-control"
-                          data-choices='{"searchEnabled":true}'
+        <!--//Page content//-->
+        <div
+          class="
+            content
+            pb-0
+            p-4
+            d-flex
+            flex-column-fluid
+            position-relative
+            h-150
+          "
+        >
+          <div class="container-fluid px-9">
+            <div class="row">
+              <div class="col-12 col-lg-7 col-xl-8 mb-4">
+                <div class="card h-100">
+                  <div class="d-flex card-header align-items-center">
+                    <h6 class="pe-3 mb-0">Bid - Ask for</h6>
+                    <div class="flex-grow-1 ms-auto">
+                      <select
+                        @change="changeBaseSymbol"
+                        id="Searchable"
+                        class="form-control"
+                        data-choices="{ searchEnabled: true }"
+                      >
+                        <option
+                          v-for="crypto in cryptos"
+                          :key="crypto"
+                          :value="crypto"
                         >
-                          <option
-                            v-for="quote in quotes"
-                            :key="quote"
-                            :value="quote"
-                          >
-                            {{ quote }}
-                          </option>
-                        </select>
-                      </div>
-
-                      <div class="ps-2 flex-shrink-1 ms-auto">
-                        <button
-                          @click="getSpreadData(baseSymbol, quoteSymbol)"
-                          type="button"
-                          class="btn btn-sm btn-outline-primary"
-                        >
-                          Refresh
-                          <i
-                            class="fe-1x ms-1 align-middle"
-                            data-feather="refresh-cw"
-                          ></i>
-                        </button>
-                      </div>
+                          {{ crypto }}
+                        </option>
+                      </select>
                     </div>
-                    <div class="card-body ps-0">
-                      <client-only>
+                    <h6 class="pe-3 mb-0">&nbsp;in&nbsp;</h6>
+                    <div class="flex-grow-1 ms-auto">
+                      <select
+                        @change="changeQuoteSymbol"
+                        :id="`Searchable`"
+                        class="form-control"
+                        :data-choices="`{ searchEnabled: true }`"
+                      >
+                        <option
+                          v-for="quote in quotes"
+                          :key="quote"
+                          :value="quote"
+                        >
+                          {{ quote }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="ps-2 flex-shrink-1 ms-auto">
+                      <button
+                        @click="getSpreadData(baseSymbol, quoteSymbol)"
+                        type="button"
+                        class="btn btn-sm btn-outline-primary"
+                      >
+                        Refresh
+                        <i
+                          class="fe-1x ms-1 align-middle"
+                          data-feather="refresh-cw"
+                        ></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body ps-0">
+                    <client-only>
                       <ApexBarChart
                         :id="'btcChart'"
                         v-if="rerenderData > 0"
                         :data-props="exchangesSpreads"
                         :key="rerenderData"
                       />
-                        </client-only >
-                    </div>
+                    </client-only>
                   </div>
                 </div>
-                <div class="col-lg-5 col-xl-4 mb-4">
-                  <div class="card h-100 overflow-hidden">
-                    <div
-                      class="
-                        d-flex
-                        card-header
-                        justify-content-between
-                        align-items-center
-                      "
-                    >
-                      <h6 class="pe-3 mb-0">Recommendations</h6>
-                      <!--Select Period of data showing-->
-                    </div>
-                    <div
-                      class="
-                        card-body
-                        d-flex
-                        align-items-center
-                        justify-content-around
-                        flex-column
-                      "
-                    >
-                      <h4>Buy on</h4>
-                      <h3>
-                        {{ buyInfo.btc.exchange }} for ${{ buyInfo.btc.price }}
-                      </h3>
-                      <h4>Sell on</h4>
-                      <h3>
-                        {{ sellInfo.btc.exchange }} for ${{
-                          sellInfo.btc.price
-                        }}
-                      </h3>
-                    </div>
+              </div>
+              <div class="col-lg-5 col-xl-4 mb-4">
+                <div class="card h-100 overflow-hidden">
+                  <div
+                    class="
+                      d-flex
+                      card-header
+                      justify-content-between
+                      align-items-center
+                    "
+                  >
+                    <h6 class="pe-3 mb-0">Recommendations</h6>
+                    <!--Select Period of data showing-->
+                  </div>
+                  <div
+                    class="
+                      card-body
+                      d-flex
+                      align-items-center
+                      justify-content-around
+                      flex-column
+                    "
+                  >
+                    <h4>Buy on</h4>
+                    <h3>
+                      {{ buyInfo.btc.exchange }} for ${{ buyInfo.btc.price }}
+                    </h3>
+                    <h4>Sell on</h4>
+                    <h3>
+                      {{ sellInfo.btc.exchange }} for ${{ sellInfo.btc.price }}
+                    </h3>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!--//Page content End//-->
+        </div>
+        <!--//Page content End//-->
 
-          <!--//Page-footer//-->
-          <footer class="pb-4">
-            <div class="container-fluid px-4">
-              <span class="d-block lh-sm small text-muted text-end">
-                &copy; 2021. Copyright
-              </span>
-            </div>
-          </footer>
-          <!--/.Page Footer End-->
-        </main>
-        <!--///////////Page content wrapper End///////////////-->
-      </div>
+        <!--//Page-footer//-->
+        <footer class="pb-4">
+          <div class="container-fluid px-4">
+            <span class="d-block lh-sm small text-muted text-end">
+              &copy; 2021. Copyright
+            </span>
+          </div>
+        </footer>
+        <!--/.Page Footer End-->
+      </main>
+      <!--///////////Page content wrapper End///////////////-->
     </div>
-    <script>feather.replace()</script>
+    <script>
+      feather.replace()
+    </script>
   </body>
 </template>
 <script>
@@ -459,6 +455,7 @@ export default {
   },
 
   mounted: function () {
+    feather.replace()
     this.getSpreadData(this.baseSymbol, this.quoteSymbol)
   },
   methods: {
