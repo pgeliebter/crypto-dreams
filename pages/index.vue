@@ -195,29 +195,66 @@
                   <div class="card h-100">
                     <div class="d-flex card-header align-items-center">
                       <h6 class="pe-3 mb-0">Bid - Ask spread for BTC in USD</h6>
-
-                      <button
-                        @click="getSpreadData('BTC')"
-                        type="button"
-                        class="
-                          ms-auto
-                          flex-shrink-1
-                          btn btn-sm btn-outline-primary
-                        "
-                      >
-                        Refresh
-                        <i
-                          class="fe-1x ms-1 align-middle"
-                          data-feather="refresh-cw"
-                        ></i>
-                      </button>
+                      <div class="flex-grow-1 ms-auto">
+                        <span>
+                          <select
+                            @change="changeBaseSymbol"
+                            id="Searchable"
+                            class="form-control"
+                            data-choices='{"searchEnabled":true}'
+                          >
+                            <option
+                              v-for="crypto in cryptos"
+                              :key="crypto"
+                              :value="crypto"
+                            >
+                              {{ crypto }}
+                            </option>
+                          </select>
+                        </span>
+                      </div>
+                      <div class="flex-grow-1 ms-auto">
+                        <span>
+                          <select
+                            @change="changeQuoteSymbol"
+                            id="Searchable"
+                            class="form-control"
+                            data-choices='{"searchEnabled":true}'
+                          >
+                            <option
+                              v-for="quote in quotes"
+                              :key="quote"
+                              :value="quote"
+                            >
+                              {{ quote }}
+                            </option>
+                          </select>
+                        </span>
+                      </div>
+                      <div class="flex-shrink-0 ms-auto">
+                        <button
+                          @click="getSpreadData('BTC')"
+                          type="button"
+                          class="
+                            ms-auto
+                            flex-shrink-1
+                            btn btn-sm btn-outline-primary
+                          "
+                        >
+                          Refresh
+                          <i
+                            class="fe-1x ms-1 align-middle"
+                            data-feather="refresh-cw"
+                          ></i>
+                        </button>
+                      </div>
                     </div>
                     <div class="card-body ps-0">
                       <ApexBarChart
                         :id="'btcChart'"
-                        v-if="btcRenderData > 0"
+                        v-if="rerenderData > 0"
                         :data-props="exchangesSpreads"
-                        :key="btcRenderData"
+                        :key="rerenderData"
                       />
                     </div>
                   </div>
@@ -258,7 +295,7 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-lg-5 col-xl-4 mb-4">
                   <div class="card h-100 overflow-hidden">
                     <div
@@ -270,7 +307,6 @@
                       "
                     >
                       <h6 class="pe-3 mb-0">Recommendations</h6>
-                      <!--Select Period of data showing-->
                     </div>
                     <div
                       class="
@@ -325,7 +361,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <!--//Page content End//-->
@@ -357,6 +393,7 @@ export default {
     return {
       btcRenderData: 0,
       ethRenderData: 0,
+      rerenderData: 0,
       buyInfo: {
         btc: { price: 0, exchange: '' },
         eth: { price: 0, exchange: '' },
@@ -489,12 +526,16 @@ export default {
           icon: 'https://assets.shrimpy.io/exchanges/gateio.png',
         },
       ],
+      cryptos: ['BTC', 'ETH', 'ETC', 'ADA'],
+      quotes: ['USD', 'USDC', 'GBP', 'EUR'],
+      baseSymbol: 'BTC',
+      quoteSymbol: 'USD',
     }
   },
 
   mounted: function () {
-    this.getSpreadData('BTC')
-    this.getSpreadData('ETH')
+    this.getSpreadData(this.baseSymbol)
+    this.getSpreadData(this.baseSymbol)
   },
   methods: {
     setBuyOnAndSellOn: function (exchangesSpreads) {
@@ -526,8 +567,18 @@ export default {
         this.exchangesSpreads = response.data[0]
         console.log(response.status, response.data[0])
         this.setBuyOnAndSellOn(response.data[0])
-        this[`${params.toLowerCase()}RenderData`] += 1
+        this.rerenderData += 1
       })
+    },
+    changeBaseSymbol: function (e) {
+      console.log('e', e.target.value)
+      this.baseSymbol = e.target.value
+      this.getSpreadData(this.baseSymbol)
+    },
+    changeQuoteSymbol: function (e) {
+      console.log('e', e.target.value)
+      this.quoteSymbol = e.target.value
+      this.getSpreadData(this.quoteSymbol)
     },
   },
 }
