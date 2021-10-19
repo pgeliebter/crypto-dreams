@@ -1,5 +1,9 @@
 export default {
 	target: 'static',
+	ssr: false,
+	generate: {
+		fallback: true
+	},
 	// ssr: process.env.NODE_ENV == 'development' ? true : false,
 	// target: process.env.NODE_ENV == 'development' ? 'static' : 'server',
 	// Global page headers: https://go.nuxtjs.dev/config-head
@@ -56,7 +60,7 @@ export default {
 		],
 		script: [
 			{ src: '/assets/vendor/feather.min.js', body: true },
-			// 	{ src: '/assets/js/theme.bundle.js', body: true },
+			{ src: '/assets/js/theme.bundle.js', body: true },
 			{ src: '/assets/vendor/apexcharts.min.js', body: true }
 		]
 	},

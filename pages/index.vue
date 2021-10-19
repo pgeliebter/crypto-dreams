@@ -2,10 +2,8 @@
   <body class="bg-white">
     <!--////////////////// PreLoader Start//////////////////////-->
     <div class="loader">
-      <!--Placeholder animated layout for preloader-->
       <div class="d-flex flex-column flex-root">
         <div class="page d-flex flex-row flex-column-fluid">
-          <!--Sidebar start-->
 
           <div class="d-flex flex-column flex-row-fluid">
             <div
@@ -60,8 +58,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <!--////////////////// /.PreLoader END//////////////////////-->
+    </div> 
+    <!--////////////////// /.PreLoader END//////////////////////
     <div class="d-flex flex-column flex-root">
       <!--Page-->
       <div class="page d-flex flex-row flex-column-fluid">
@@ -199,7 +197,6 @@
                     <div class="d-flex card-header align-items-center">
                       <h6 class="pe-3 mb-0">Bid - Ask for</h6>
                       <div class="flex-grow-1 ms-auto">
-                        <span>
                           <select
                             @change="changeBaseSymbol"
                             id="Searchable"
@@ -214,26 +211,23 @@
                               {{ crypto }}
                             </option>
                           </select>
-                        </span>
                       </div>
                       <h6 class="pe-3 mb-0">&nbsp;in&nbsp;</h6>
                       <div class="flex-grow-1 ms-auto">
-                        <span>
-                          <select
-                            @change="changeQuoteSymbol"
-                            id="Searchable"
-                            class="form-control"
-                            data-choices='{"searchEnabled":true}'
+                        <select
+                          @change="changeQuoteSymbol"
+                          id="Searchable"
+                          class="form-control"
+                          data-choices='{"searchEnabled":true}'
+                        >
+                          <option
+                            v-for="quote in quotes"
+                            :key="quote"
+                            :value="quote"
                           >
-                            <option
-                              v-for="quote in quotes"
-                              :key="quote"
-                              :value="quote"
-                            >
-                              {{ quote }}
-                            </option>
-                          </select>
-                        </span>
+                            {{ quote }}
+                          </option>
+                        </select>
                       </div>
 
                       <div class="ps-2 flex-shrink-1 ms-auto">
@@ -251,12 +245,14 @@
                       </div>
                     </div>
                     <div class="card-body ps-0">
+                      <client-only>
                       <ApexBarChart
                         :id="'btcChart'"
                         v-if="rerenderData > 0"
                         :data-props="exchangesSpreads"
                         :key="rerenderData"
                       />
+                        </client-only >
                     </div>
                   </div>
                 </div>
@@ -296,78 +292,10 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="row">
-                <div class="col-lg-5 col-xl-4 mb-4">
-                  <div class="card h-100 overflow-hidden">
-                    <div
-                      class="
-                        d-flex
-                        card-header
-                        justify-content-between
-                        align-items-center
-                      "
-                    >
-                      <h6 class="pe-3 mb-0">Recommendations</h6>
-                    </div>
-                    <div
-                      class="
-                        card-body
-                        d-flex
-                        align-items-center
-                        justify-content-around
-                        flex-column
-                      "
-                    >
-                      <h4>Buy on</h4>
-                      <h3>
-                        {{ buyInfo.eth.exchange }} for ${{ buyInfo.eth.price }}
-                      </h3>
-                      <h4>Sell on</h4>
-                      <h3>
-                        {{ sellInfo.eth.exchange }} for ${{
-                          sellInfo.eth.price
-                        }}
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-lg-7 col-xl-8 mb-4">
-                  <div class="card h-100">
-                    <div class="d-flex card-header align-items-center">
-                      <h6 class="pe-3 mb-0">Bid - Ask spread for ETH in USD</h6>
-
-                      <button
-                        @click="getSpreadData('ETH')"
-                        type="button"
-                        class="
-                          ms-auto
-                          flex-shrink-1
-                          btn btn-sm btn-outline-primary
-                        "
-                      >
-                        Refresh
-                        <i
-                          class="fe-1x ms-1 align-middle"
-                          data-feather="refresh-cw"
-                        ></i>
-                      </button>
-                    </div>
-                    <div class="card-body ps-0">
-                      <ApexBarChart
-                        :id="`ethChart`"
-                        v-if="ethRenderData > 0"
-                        :data-props="exchangesSpreads"
-                        :key="ethRenderData"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div> -->
             </div>
           </div>
           <!--//Page content End//-->
 
-          <!-- no footer for now as it was messing -->
           <!--//Page-footer//-->
           <footer class="pb-4">
             <div class="container-fluid px-4">
@@ -381,11 +309,7 @@
         <!--///////////Page content wrapper End///////////////-->
       </div>
     </div>
-    <script src="/assets/js/theme.bundle.js"></script>
-
-    <script defer>
-      feather.replace()
-    </script>
+    <script>feather.replace()</script>
   </body>
 </template>
 <script>
