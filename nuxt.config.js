@@ -1,5 +1,4 @@
 export default {
-	ssr: true,
 	target: 'static',
 	// ssr: process.env.NODE_ENV == 'development' ? true : false,
 	// target: process.env.NODE_ENV == 'development' ? 'static' : 'server',
