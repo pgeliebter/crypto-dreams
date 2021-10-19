@@ -111,21 +111,24 @@
                         border-bottom border-end
                       "
                     >
-                      <img
+                      Spreads
+                      <!-- <img
                         src="assets/media/brand-logos/slack.svg"
                         class="height-30 w-auto"
                         alt=""
-                      />
+                      /> -->
                     </a>
                     <a
                       href="#!"
-                      class="col-6 hover-bg-gray text-center p-4 border-bottom"
+                      class="
+                        col-6
+                        hover-bg-gray
+                        text-center
+                        p-4
+                        border-bottom border-end
+                      "
                     >
-                      <img
-                        src="assets/media/brand-logos/github.svg"
-                        class="height-30 w-auto"
-                        alt=""
-                      />
+                      Ticker
                     </a>
                     <a
                       href="#!"
@@ -189,7 +192,7 @@
               h-150
             "
           >
-            <div class="container-fluid px-0">
+            <div class="container-fluid px-9">
               <div class="row">
                 <div class="col-12 col-lg-7 col-xl-8 mb-4">
                   <div class="card h-100">
