@@ -1,6 +1,8 @@
 export default {
-	ssr: process.env.NODE_ENV == 'development' ? true : false,
-	target: process.env.NODE_ENV == 'development' ? 'static' : 'server',
+	ssr: true,
+	target: 'static',
+	// ssr: process.env.NODE_ENV == 'development' ? true : false,
+	// target: process.env.NODE_ENV == 'development' ? 'static' : 'server',
 	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
 		title: 'crypto-dreams',
