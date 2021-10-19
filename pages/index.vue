@@ -194,7 +194,7 @@
                 <div class="col-12 col-lg-7 col-xl-8 mb-4">
                   <div class="card h-100">
                     <div class="d-flex card-header align-items-center">
-                      <h6 class="pe-3 mb-0">Bid - Ask spread for BTC in USD</h6>
+                      <h6 class="pe-3 mb-0">Bid - Ask for</h6>
                       <div class="flex-grow-1 ms-auto">
                         <span>
                           <select
@@ -213,6 +213,7 @@
                           </select>
                         </span>
                       </div>
+                      <h6 class="pe-3 mb-0">&nbsp;in&nbsp;</h6>
                       <div class="flex-grow-1 ms-auto">
                         <span>
                           <select
@@ -231,15 +232,12 @@
                           </select>
                         </span>
                       </div>
-                      <div class="flex-shrink-0 ms-auto">
+
+                      <div class="ps-2 flex-shrink-1 ms-auto">
                         <button
-                          @click="getSpreadData('BTC')"
+                          @click="getSpreadData(baseSymbol, quoteSymbol)"
                           type="button"
-                          class="
-                            ms-auto
-                            flex-shrink-1
-                            btn btn-sm btn-outline-primary
-                          "
+                          class="btn btn-sm btn-outline-primary"
                         >
                           Refresh
                           <i
@@ -534,8 +532,7 @@ export default {
   },
 
   mounted: function () {
-    this.getSpreadData(this.baseSymbol)
-    this.getSpreadData(this.baseSymbol)
+    this.getSpreadData(this.baseSymbol, this.quoteSymbol)
   },
   methods: {
     setBuyOnAndSellOn: function (exchangesSpreads) {
@@ -562,23 +559,21 @@ export default {
         exchange: sellExchange,
       }
     },
-    getSpreadData: function (params) {
-      this.$axios.get(`/spreads/${params}`).then((response) => {
-        this.exchangesSpreads = response.data[0]
-        console.log(response.status, response.data[0])
-        this.setBuyOnAndSellOn(response.data[0])
-        this.rerenderData += 1
-      })
+    getSpreadData: function (base, quote) {
+      this.$axios
+        .get(`/spreads`, { params: { base: base, quote: quote } })
+        .then((response) => {
+          this.exchangesSpreads = response.data[0]
+          console.log(response.status, response.data[0])
+          this.setBuyOnAndSellOn(response.data[0])
+          this.rerenderData += 1
+        })
     },
     changeBaseSymbol: function (e) {
-      console.log('e', e.target.value)
       this.baseSymbol = e.target.value
-      this.getSpreadData(this.baseSymbol)
     },
     changeQuoteSymbol: function (e) {
-      console.log('e', e.target.value)
       this.quoteSymbol = e.target.value
-      this.getSpreadData(this.quoteSymbol)
     },
   },
 }
