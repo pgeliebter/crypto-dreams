@@ -2,7 +2,7 @@ export default {
 	target: 'static',
 	ssr: false,
 	generate: {
-		fallback: false
+		fallback: true
 	},
 
 	head: {
@@ -49,8 +49,7 @@ export default {
 			},
 			{
 				rel: 'stylesheet',
-				href: './assets/vendor/css/choices.min.css',
-				defer: true
+				href: './assets/vendor/css/choices.min.css'
 			},
 			{
 				rel: 'stylesheet',
@@ -58,8 +57,8 @@ export default {
 			}
 		],
 		script: [
-			{ src: './assets/js/theme.bundle.js', body:true, defer: true },
-			{ src: './assets/vendor/feather.min.js', body: true, defer: true },
+			{ src: './assets/js/theme.bundle.js', body:true },
+			{ src: './assets/vendor/feather.min.js', body: true },
 
 			{
 				src: './assets/vendor/apexcharts.min.js',
@@ -93,5 +92,14 @@ export default {
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
-	build: {}
+	build: {
+    filenames: {
+			app: ({ isDev, isModern }) => `[name]${isModern ? '.modern' : ''}.js`,
+			chunk: ({ isDev, isModern }) =>  `[name]${isModern ? '.modern' : ''}.js`,
+			css: '[path][name].css' ,
+			img:  '[path][name].[ext]',
+			font:  '[path][name].[ext]' ,
+			video:  '[path][name].[ext]' ,
+    }
+	}
 }
