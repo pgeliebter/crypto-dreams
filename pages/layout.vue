@@ -1,5 +1,6 @@
 <template>
   <body class="bg-white">
+    <script src="assets/js/theme.bundle.js"></script>
     <!--////////////////// PreLoader Start//////////////////////-->
     <div class="loader">
       <!--Placeholder animated layout for preloader-->
@@ -885,7 +886,7 @@
                 "
               >
                 <a
-                  href="javascript:void(0)"
+                  href="#"
                   class="
                     sidebar-trigger
                     hover-bg-primary
