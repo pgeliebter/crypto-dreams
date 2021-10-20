@@ -8,6 +8,7 @@ export default {
       barChartData: { data: this.dataProps, id: this.id },
     }
   },
+
   mounted: function () {
     const cee = this.dataProps.orderBooks.map((e) => e.orderBook)
 
@@ -16,6 +17,9 @@ export default {
   props: { dataProps: Object, id: String },
   methods: {
     ApexBarChart: function (dataProps) {
+      const log10 = function (n) {
+        return Math.log(n) / Math.log(10)
+      }
       const cPrimary = '#5252F9'
       const cWarning = '#ffb016'
       const cSecondary = '#ff4d62'
@@ -102,13 +106,18 @@ export default {
               colors: cMuted,
               fontFamily: cFont,
             },
+            formatter: function (val, index) {
+              if (log10(val) > 2) {
+                return Math.round(val)
+              } else {
+                return val.toFixed(4)
+              }
+            },
           },
           crosshairs: {
             show: false,
           },
           forceNiceScale: true,
-          decimalsInFloat: 0,
-
           min: function () {
             //  function to return the largest spread to calculate min later value
             function largestSpread(dataProps) {
@@ -130,7 +139,14 @@ export default {
             let min = Math.min(...array)
             // subtracting largest spread from smallest spread to set the min value
             min = min - largestSpread(dataProps)
-            return Math.round(min)
+
+            console.log(log10(min))
+            if (log10(min) > 2) {
+              min = Math.round(min)
+              return min
+            } else {
+              return min
+            }
           },
           max: function () {
             // map to get max value
@@ -138,7 +154,13 @@ export default {
               (x) => x.orderBook.asks[0].price
             )
             let max = Math.max(...array)
-            return Math.round(max)
+            console.log(log10(max))
+            if (log10(max) > 2) {
+              max = Math.round(max)
+              return max
+            } else {
+              return max
+            }
           },
         },
         plotOptions: {
