@@ -167,8 +167,8 @@ export default {
       selectedCrypto: '',
       exchangesSpreads: {},
       exchangeInfo: [],
-      cryptos: ['BTC', 'ETH', 'ETC', 'ADA'],
-      quotes: ['USD', 'USDC', 'GBP', 'EUR'],
+      cryptos: ['BTC', 'ETH', 'ETC'],
+      quotes: ['USD', 'GBP', 'EUR'],
       baseSymbol: 'BTC',
       quoteSymbol: 'USD',
     }
