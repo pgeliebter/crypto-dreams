@@ -1,5 +1,8 @@
 <template>
-  <div :id="id"></div>
+  <div>
+    <!-- <Themefile /> -->
+    <div :id="id"></div>
+  </div>
 </template>
  <script>
 export default {
