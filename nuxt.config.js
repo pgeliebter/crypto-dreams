@@ -23,7 +23,7 @@ export default {
 			{
 				rel: 'icon',
 				type: 'image/x-icon',
-				href: './favicon.png'
+				href: '/favicon.png'
 			},
 			{
 				rel: 'stylesheet',
@@ -92,14 +92,5 @@ export default {
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
-	build: {
-    filenames: {
-			app: ({ isDev, isModern }) => `[name]${isModern ? '.modern' : ''}.js`,
-			chunk: ({ isDev, isModern }) =>  `[name]${isModern ? '.modern' : ''}.js`,
-			css: '[path][name].css' ,
-			img:  '[path][name].[ext]',
-			font:  '[path][name].[ext]' ,
-			video:  '[path][name].[ext]' ,
-    }
-	}
+	build: {}
 }
