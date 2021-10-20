@@ -99,6 +99,7 @@
           </div> -->
         </div>
       </li>
+      <h3 class="ms-10 mb-0">Welcome to Crypto Dreams!</h3>
     </ul>
     <ul class="navbar-nav ms-auto d-flex align-items-center h-100">
       <li
