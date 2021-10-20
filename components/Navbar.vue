@@ -2,9 +2,23 @@
   <!--//page-header//-->
   <header class="navbar py-0 page-header navbar-expand navbar-light px-4">
     <ul class="navbar-nav d-flex align-items-center h-100">
+      <li
+        class="
+          nav-item
+          d-flex
+          flex-column
+          h-100
+          justify-content-center
+          dropdown
+        "
+      >
+        <!-- Icon made by Pixel perfect from www.flaticon.com -->
+        <img src="/favicon.png" class="fe-4x align-middle" alt="" />
+      </li>
       <!-- this is the four squares which will be used for navigation -->
       <li
         class="
+          ps-4
           nav-item
           d-flex
           flex-column
@@ -31,6 +45,19 @@
         </a>
         <div class="dropdown-menu overflow-hidden p-0 mt-0">
           <div class="row mx-0">
+            <div
+              class="
+                col-12
+                hover-bg-gray
+                text-center
+                p-4
+                border-bottom border-end
+              "
+            >
+              More pages coming soon!
+            </div>
+          </div>
+          <!-- <div class="row mx-0">
             <a
               href="#!"
               class="
@@ -42,11 +69,6 @@
               "
             >
               Spreads
-              <!-- <img
-                        src="assets/media/brand-logos/slack.svg"
-                        class="height-30 w-auto"
-                        alt=""
-                      /> -->
             </a>
             <a
               href="#!"
@@ -74,7 +96,7 @@
                 alt=""
               />
             </a>
-          </div>
+          </div> -->
         </div>
       </li>
     </ul>
