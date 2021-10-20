@@ -1,7 +1,6 @@
 <template>
-  <body class="">
-    <Preloader />
-
+  <body>
+    <!-- <Preloader /> -->
     <div class="d-flex fle x-column flex-root">
       <!--///////////Page content wrapper///////////////-->
       <main class="d-flex flex-column flex-row-fluid">
