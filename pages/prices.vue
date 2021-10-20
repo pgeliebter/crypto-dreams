@@ -22,7 +22,7 @@
                   <div class="card h-100">
                     <div class="d-flex card-header align-items-center">
                       <h6 class="pe-3 mb-0">
-                        Current Price & Volume for Bitcoin
+                        Current Price &amp; Volume for Bitcoin
                       </h6>
                     </div>
                     <div class="card-body">

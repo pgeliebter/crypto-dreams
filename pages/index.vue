@@ -101,7 +101,7 @@
               <div class="col-12 col-lg-7 col-xl-8 mb-4">
                 <div class="card h-100">
                   <div class="d-flex card-header align-items-center">
-                    <h6 class="pe-3 mb-0">Bids & Asks</h6>
+                    <h6 class="pe-3 mb-0">Bids &amp; Asks</h6>
                     <!-- <div class="flex-grow-1 ms-auto">
                         <select
                           @change="changeBaseSymbol"
