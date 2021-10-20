@@ -17,6 +17,7 @@ export default {
   props: { dataProps: Object, id: String },
   methods: {
     ApexBarChart: function (dataProps) {
+      console.log(dataProps)
       const log10 = function (n) {
         return Math.log(n) / Math.log(10)
       }
@@ -107,7 +108,7 @@ export default {
               fontFamily: cFont,
             },
             formatter: function (val, index) {
-              if (log10(val) > 2) {
+              if (log10(val) > 1) {
                 return Math.round(val)
               } else {
                 return val.toFixed(4)
@@ -140,7 +141,6 @@ export default {
             // subtracting largest spread from smallest spread to set the min value
             min = min - largestSpread(dataProps)
 
-            console.log(log10(min))
             if (log10(min) > 2) {
               min = Math.round(min)
               return min
@@ -154,7 +154,6 @@ export default {
               (x) => x.orderBook.asks[0].price
             )
             let max = Math.max(...array)
-            console.log(log10(max))
             if (log10(max) > 2) {
               max = Math.round(max)
               return max
@@ -183,16 +182,20 @@ export default {
           y: [
             {
               formatter: function (y) {
-                if (typeof y !== 'undefined') {
-                  return ' $' + y.toFixed(0)
+                if (typeof y !== 'undefined' && log10(y) <= 2) {
+                  return `${dataProps.quoteSymbol} ${y.toFixed(2)}`
+                } else if (typeof y !== 'undefined4') {
+                  return `${dataProps.quoteSymbol} ${y.toFixed(0)}`
                 }
                 return y
               },
             },
             {
               formatter: function (y) {
-                if (typeof y !== 'undefined') {
-                  return ' $' + y.toFixed(0)
+                if (typeof y !== 'undefined' && log10(y) <= 2) {
+                  return `${dataProps.quoteSymbol} ${y.toFixed(2)}`
+                } else if (typeof y !== 'undefined4') {
+                  return `${dataProps.quoteSymbol} ${y.toFixed(0)}`
                 }
                 return y
               },
