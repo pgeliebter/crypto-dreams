@@ -59,12 +59,7 @@ export default {
 		script: [
 			{ src: './assets/js/theme.bundle.js', body:true },
 			{ src: './assets/vendor/feather.min.js', body: true },
-
-			{
-				src: './assets/vendor/apexcharts.min.js',
-				body: true,
-				defer: true
-			}
+			{	src: './assets/vendor/apexcharts.min.js',	body: true	}
 		]
 	},
 
