@@ -17,7 +17,6 @@ export default {
   props: { dataProps: Object, id: String },
   methods: {
     ApexBarChart: function (dataProps) {
-      console.log(dataProps)
       const log10 = function (n) {
         return Math.log(n) / Math.log(10)
       }
