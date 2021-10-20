@@ -122,9 +122,15 @@
                       "
                     >
                       <h4>Buy on</h4>
-                      <h3>{{ buyInfo.exchange }} for ${{ buyInfo.price }}</h3>
+                      <h3>
+                        {{ buyInfo.exchange }} for
+                        {{ `${quoteSymbol} ${buyInfo.price}` }}
+                      </h3>
                       <h4>Sell on</h4>
-                      <h3>{{ sellInfo.exchange }} for ${{ sellInfo.price }}</h3>
+                      <h3>
+                        {{ sellInfo.exchange }} for
+                        {{ `${quoteSymbol} ${sellInfo.price}` }}
+                      </h3>
                     </div>
                   </div>
                 </div>
@@ -166,7 +172,6 @@ export default {
       },
       selectedCrypto: '',
       exchangesSpreads: {},
-      exchangeInfo: [],
       cryptos: ['BTC', 'ETH', 'ETC'],
       quotes: ['USD', 'GBP', 'EUR'],
       baseSymbol: 'BTC',
