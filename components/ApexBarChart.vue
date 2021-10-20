@@ -40,6 +40,18 @@ export default {
           toolbar: {
             show: false,
           },
+          animations: {
+            enabled: true,
+            speed: 1000,
+            animateGradually: {
+              enabled: true,
+              delay: 100,
+            },
+            dynamicAnimation: {
+              enabled: true,
+              speed: 350,
+            },
+          },
         },
         colors: [cPrimary, cWarning],
         grid: {
