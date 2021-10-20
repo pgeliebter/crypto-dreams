@@ -2,7 +2,7 @@ export default {
 	target: 'static',
 	ssr: false,
 	generate: {
-		fallback: true
+		fallback: false
 	},
 
 	head: {
