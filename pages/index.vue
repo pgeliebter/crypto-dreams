@@ -13,7 +13,7 @@
             <div class="position-relative container-fluid px-0">
               <div class="row align-items-center position-relative">
                 <div class="col-md-7 mb-4 mb-md-0">
-                  <h3 class="mb-2 mb-0">Welcome to the Spreads page!</h3>
+                  <h3 class="mb-2 mb-0">Welcome to Crypto Dreams!</h3>
                 </div>
               </div>
             </div>
