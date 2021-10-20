@@ -27,7 +27,7 @@ export default {
 			},
 			{
 				rel: 'stylesheet',
-				href: './assets/fonts/bootstrap-icons/bootstrap-icons.css'
+				href: '/assets/fonts/bootstrap-icons/bootstrap-icons.css'
 			},
 			{
 				rel: 'preconnect',
@@ -45,21 +45,21 @@ export default {
 			},
 			{
 				rel: 'stylesheet',
-				href: './assets/vendor/css/simplebar.min.css'
+				href: '/assets/vendor/css/simplebar.min.css'
 			},
 			{
 				rel: 'stylesheet',
-				href: './assets/vendor/css/choices.min.css'
+				href: '/assets/vendor/css/choices.min.css'
 			},
 			{
 				rel: 'stylesheet',
-				href: './assets/css/style.min.css'
+				href: '/assets/css/style.min.css'
 			}
 		],
 		script: [
-			{ src: './assets/js/theme.bundle.js', body:true },
-			{ src: './assets/vendor/feather.min.js', body: true },
-			{	src: './assets/vendor/apexcharts.min.js',	body: true	}
+			{ src: '/assets/js/theme.bundle.js', body:true },
+			{ src: '/assets/vendor/feather.min.js', body: true },
+			{	src: '/assets/vendor/apexcharts.min.js',	body: true	}
 		]
 	},
 
