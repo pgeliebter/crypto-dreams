@@ -6,7 +6,7 @@ export default {
 	},
 
 	head: {
-		title: 'crypto-dreams',
+		title: 'Crypto Dreams',
 		htmlAttrs: {
 			lang: 'en'
 		},
@@ -23,7 +23,7 @@ export default {
 			{
 				rel: 'icon',
 				type: 'image/x-icon',
-				href: '/favicon.ico'
+				href: '/favicon.png'
 			},
 			{
 				rel: 'stylesheet',
