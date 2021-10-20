@@ -162,7 +162,7 @@
                     <h6 class="pe-3 mb-0">Recommendations</h6>
                     <!--Select Period of data showing-->
                   </div>
-                  <div
+                  <!-- <div
                     class="
                       card-body
                       d-flex
@@ -170,18 +170,45 @@
                       justify-content-around
                       flex-column
                     "
+                  > -->
+                  <ul
+                    class="
+                      card-body
+                      d-flex
+                      align-items-center
+                      justify-content-around
+                      flex-column
+                      list-group-flush list-group
+                    "
                   >
-                    <h4>Buy on</h4>
-                    <h3>
-                      {{ buyInfo.exchange }} for
-                      {{ `${quoteSymbol} ${buyInfo.price}` }}
-                    </h3>
-                    <h4>Sell on</h4>
-                    <h3>
-                      {{ sellInfo.exchange }} for
-                      {{ `${quoteSymbol} ${sellInfo.price}` }}
-                    </h3>
-                  </div>
+                    <li class="list-group-item">
+                      <h4>Best buy on</h4>
+                      <h3>
+                        <img
+                          :src="`https://assets.shrimpy.io/exchanges/${buyInfo.exchange.toLowerCase()}.png`"
+                        />
+                        {{ buyInfo.exchange }}
+                      </h3>
+                      <h3>
+                        for
+                        {{ `${quoteSymbol} ${buyInfo.price}` }}
+                      </h3>
+                    </li>
+                    <li class="list-group-item">
+                      <h4>Best sell on</h4>
+                      <h3>
+                        <img
+                          :src="`https://assets.shrimpy.io/exchanges/${sellInfo.exchange.toLowerCase()}.png`"
+                        />
+                        {{ sellInfo.exchange }}
+                      </h3>
+                      <h3>
+                        for
+                        {{ `${quoteSymbol} ${sellInfo.price}` }}
+                      </h3>
+                    </li>
+                  </ul>
+                  <!-- </div> -->
                 </div>
               </div>
             </div>
@@ -257,13 +284,15 @@ export default {
         exchange: sellExchange,
       }
     },
-    getSpreadData: function (base, quote) {
-      this.$axios
-        .get(`/spreads`, { params: { base: base, quote: quote } })
+    getSpreadData: async function (base, quote) {
+      const response = await this.$axios
+        .get(`/spreads`, {
+          params: { base: base, quote: quote },
+        })
         .then((response) => {
           this.exchangesSpreads = response.data[0]
           this.setBuyOnAndSellOn(response.data[0])
-          this.rerenderData += 1
+          setTimeout((this.rerenderData += 1), 1000)
         })
     },
     changeBaseSymbol: function (e) {
@@ -271,6 +300,11 @@ export default {
     },
     changeQuoteSymbol: function (e) {
       this.quoteSymbol = e.target.value
+    },
+    getExchangeAssets: function (exchange) {
+      this.$axios
+        .get(`/exchanges/assets`, { params: { exchange: exchange } })
+        .then((response) => console.log(response.data))
     },
   },
 }
