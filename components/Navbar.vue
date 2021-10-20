@@ -45,21 +45,8 @@
         </a>
         <div class="dropdown-menu overflow-hidden p-0 mt-0">
           <div class="row mx-0">
-            <div
-              class="
-                col-12
-                hover-bg-gray
-                text-center
-                p-4
-                border-bottom border-end
-              "
-            >
-              More pages coming soon!
-            </div>
-          </div>
-          <!-- <div class="row mx-0">
             <a
-              href="#!"
+              href="/"
               class="
                 col-6
                 hover-bg-gray
@@ -71,7 +58,7 @@
               Spreads
             </a>
             <a
-              href="#!"
+              href="/prices"
               class="
                 col-6
                 hover-bg-gray
@@ -82,7 +69,7 @@
             >
               Ticker
             </a>
-            <a href="#!" class="col-6 hover-bg-gray text-center p-4 border-end">
+            <!-- <a href="#!" class="col-6 hover-bg-gray text-center p-4 border-end">
               <img
                 src="assets/media/brand-logos/atlassian.svg"
                 class="height-30 w-auto"
@@ -95,8 +82,8 @@
                 class="height-30 w-auto"
                 alt=""
               />
-            </a>
-          </div> -->
+            </a> -->
+          </div>
         </div>
       </li>
       <h3 class="ms-10 mb-0">Welcome to Crypto Dreams!</h3>
