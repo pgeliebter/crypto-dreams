@@ -1,8 +1,9 @@
-# Crypto Dreams Backend
+# Crypto Dreams
 
 ## Welcome
 
 Thanks for checking out my project, I hope you enjoy!
+This was built using Nuxt.js
 
 -Pinny Geliebter
 
