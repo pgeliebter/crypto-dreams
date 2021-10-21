@@ -20,12 +20,16 @@ Next, you need to set up npm dependencies/packages by doing:
 npm install
 ```
 
-Lastly, in order to run in development mode:
+Time to spin up the development server in order to run in development mode:
 ```bash
 npm run dev
 ```
 
-# To deploy to a server
+Lastly, navigate to http://localhost:8080
+or where the terminal says it is available.
+
+
+# To deploy to a remote server
 In case of deployment the correct command is:
 ```bash
 npm run generate
