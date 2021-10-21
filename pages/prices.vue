@@ -5,6 +5,40 @@
       <main class="d-flex flex-column flex-row-fluid">
         <Navbar />
 
+        <!--//Page Toolbar//-->
+        <div
+          class="
+            pb-0
+            py-4
+            px-xl-4 px-lg-4 px-xxl-4
+            d-flex
+            flex-column-fluid
+            position-relative
+            h-150
+          "
+        >
+          <div class="container-fluid">
+            <div class="card card-body">
+              <div class="d-flex align-items-center">
+                <div class="me-3">
+                  <button
+                    @click="getCoinGeckoMarketChart()"
+                    type="button"
+                    class="btn btn-sm btn-outline-primary"
+                  >
+                    Refresh
+                    <i
+                      class="fe-1x ms-1 align-middle"
+                      data-feather="refresh-cw"
+                    ></i>
+                  </button>
+                </div>
+                <h6 class="pe-3 mb-0">Price info for Bitcoin</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--//Page Toolbar End//-->
         <div
           class="
             content
@@ -83,7 +117,7 @@
                 <div class="card h-100">
                   <div class="d-flex card-header align-items-center">
                     <h6 class="pe-3 mb-0">
-                      Histoical Price in USD &amp; Volume for Bitcoin - 7 days
+                      Historical price in USD &amp; volume for past 7 days
                     </h6>
                   </div>
                   <div class="card-body px-0">
@@ -135,7 +169,6 @@ export default {
         this.currentPriceInfo.usd = response.data.bitcoin.usd
         this.currentPriceInfo.usd_24h_change =
           response.data.bitcoin.usd_24h_change.toFixed(2)
-        console.log(response.data)
       })
     },
     // changeBaseSymbol: function (e) {
