@@ -138,6 +138,7 @@
                       <h4>Best buy on</h4>
                       <h3>
                         <img
+                          v-if="rerenderData > 0"
                           :src="`https://assets.shrimpy.io/exchanges/${buyInfo.exchange.toLowerCase()}.png`"
                         />
                         {{ buyInfo.exchange }}
@@ -151,6 +152,7 @@
                       <h4>Best sell on</h4>
                       <h3>
                         <img
+                          v-if="rerenderData > 0"
                           :src="`https://assets.shrimpy.io/exchanges/${sellInfo.exchange.toLowerCase()}.png`"
                         />
                         {{ sellInfo.exchange }}
@@ -168,16 +170,7 @@
           </div>
         </div>
         <!--//Page content End//-->
-
-        <!--//Page-footer//-->
-        <footer class="pb-4">
-          <div class="container-fluid px-4">
-            <span class="d-block lh-sm small text-muted text-end">
-              &copy; 2021. Copyright
-            </span>
-          </div>
-        </footer>
-        <!--/.Page Footer End-->
+        <Footer />
       </main>
       <!--///////////Page content wrapper End///////////////-->
     </div>
@@ -237,15 +230,15 @@ export default {
         exchange: sellExchange,
       }
     },
-    getSpreadData: async function (base, quote) {
-      const response = await this.$axios
+    getSpreadData: function (base, quote) {
+      this.$axios
         .get(`/spreads`, {
           params: { base: base, quote: quote },
         })
         .then((response) => {
           this.exchangesSpreads = response.data[0]
           this.setBuyOnAndSellOn(response.data[0])
-          setTimeout((this.rerenderData += 1), 1000)
+          this.rerenderData += 1
         })
     },
     changeBaseSymbol: function (e) {
@@ -254,11 +247,12 @@ export default {
     changeQuoteSymbol: function (e) {
       this.quoteSymbol = e.target.value
     },
-    getExchangeAssets: function (exchange) {
-      this.$axios
-        .get(`/exchanges/assets`, { params: { exchange: exchange } })
-        .then((response) => console.log(response.data))
-    },
+    // not being used right now
+    // getExchangeAssets: function (exchange) {
+    //   this.$axios
+    //     .get(`/exchanges/assets`, { params: { exchange: exchange } })
+    //     .then((response) => console.log(response.data))
+    // },
   },
 }
 </script>
