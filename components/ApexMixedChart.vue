@@ -18,7 +18,13 @@ export default {
       // set up data for later usage
       const totalVolumes = dataProps.total_volumes.map((e) => e[1])
       const prices = dataProps.prices.map((e) => e[1])
-      const times = dataProps.prices.map((e) => e[0])
+      const times = dataProps.prices.map(
+        (e) =>
+          // const time = new Date(e[0])
+          // time = time + time.timezoneOffset()
+          e[0]
+      )
+      console.log(times)
       // set up colors
       const cPrimary = '#5252F9'
       const cWarning = '#ffb016'
@@ -75,10 +81,13 @@ export default {
         },
         tooltip: {
           inverseOrder: true,
-          fixed: {
-            enabled: true,
-            position: 'topRight',
-          },
+          followCursor: false,
+          // fixed: {
+          //   // enabled: true,
+          //   // position: 'topLeft',
+          //   offsetX: 100,
+          //   offsetY: -30,
+          // },
           x: {
             show: true,
             format: 'dd MMM h:mm tt',
@@ -95,6 +104,7 @@ export default {
           max: Math.max(...times),
           labels: {
             show: true,
+            datetimeUTC: false,
             // hideOverlappingLabels: true,
             datetimeFormatter: {
               year: 'yyyy',
@@ -142,7 +152,11 @@ export default {
                 colors: cMuted,
                 fontFamily: cFont,
               },
+              formatter: function (value, index) {
+                return value / 1000000
+              },
             },
+            title: { text: 'Volume in millions' },
             crosshairs: {
               show: false,
             },
@@ -151,13 +165,18 @@ export default {
             max: Math.max(...totalVolumes),
           },
           {
-            decimalsInFloat: 2,
+            decimalsInFloat: 0,
             labels: {
               show: true,
               style: {
                 colors: cMuted,
                 fontFamily: cFont,
               },
+              // offsetX: -10,
+            },
+            title: {
+              text: 'Price',
+              // offsetX: -10,
             },
             crosshairs: {
               show: false,
