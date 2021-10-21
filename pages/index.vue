@@ -92,7 +92,7 @@
                   <div class="d-flex card-header align-items-center">
                     <h6 class="pe-3 mb-0">Bids &amp; Asks</h6>
                   </div>
-                  <div class="card-body ps-0">
+                  <div class="card-body px-0">
                     <client-only>
                       <ApexBarChart
                         :id="'my-chart'"
@@ -120,17 +120,8 @@
                     "
                   >
                     <h6 class="pe-3 mb-0">Recommendations</h6>
-                    <!--Select Period of data showing-->
                   </div>
-                  <!-- <div
-                    class="
-                      card-body
-                      d-flex
-                      align-items-center
-                      justify-content-around
-                      flex-column
-                    "
-                  > -->
+
                   <ul
                     class="
                       card-body
@@ -139,6 +130,8 @@
                       justify-content-around
                       flex-column
                       list-group-flush list-group
+                      px-0
+                      text-center
                     "
                   >
                     <li class="list-group-item">
