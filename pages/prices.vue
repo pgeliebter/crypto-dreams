@@ -159,18 +159,28 @@ export default {
   methods: {
     // this page uses GoinGecko being called in the front end.
     getCoinGeckoMarketChart: function () {
-      this.$axios.get(`/prices/market_chart`).then((response) => {
-        this.priceData = response.data
-        this.rerenderData += 1
-      })
+      this.$axios
+        .get(`/prices/market_chart`)
+        .then((response) => {
+          this.priceData = response.data
+          this.rerenderData += 1
+        })
+        .catch((errors) => {
+          console.log(errors.response.status, errors.response.data)
+        })
       this.getCoinGeckoPrice()
     },
     getCoinGeckoPrice: function () {
-      this.$axios.get(`prices/current_price`).then((response) => {
-        this.currentPriceInfo.usd = response.data.bitcoin.usd
-        this.currentPriceInfo.usd_24h_change =
-          response.data.bitcoin.usd_24h_change.toFixed(2)
-      })
+      this.$axios
+        .get(`prices/current_price`)
+        .then((response) => {
+          this.currentPriceInfo.usd = response.data.bitcoin.usd
+          this.currentPriceInfo.usd_24h_change =
+            response.data.bitcoin.usd_24h_change.toFixed(2)
+        })
+        .catch((errors) => {
+          console.log(errors.response.status, errors.response.data)
+        })
     },
     // changeBaseSymbol: function (e) {
     //   this.baseSymbol = e.target.value

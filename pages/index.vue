@@ -240,6 +240,9 @@ export default {
           this.setBuyOnAndSellOn(response.data[0])
           this.rerenderData += 1
         })
+        .catch((errors) => {
+          console.log(errors.response.status, errors.response.data)
+        })
     },
     changeBaseSymbol: function (e) {
       this.baseSymbol = e.target.value
