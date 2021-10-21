@@ -135,6 +135,7 @@
         </div>
       </main>
     </div>
+    <Footer />
   </body>
 </template>
 <script>
