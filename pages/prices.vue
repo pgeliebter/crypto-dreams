@@ -9,23 +9,24 @@
             class="
               content
               pb-0
-              p-4
+              py-4
+              px-lg-4 px-xl-4 px-xxl-4
               d-flex
               flex-column-fluid
               position-relative
               h-150
             "
           >
-            <div class="container-fluid px-9">
+            <div class="container-fluid">
               <div class="row">
                 <div class="col-12 col-lg-12 col-xl-12 mb-4">
                   <div class="card h-100">
                     <div class="d-flex card-header align-items-center">
                       <h6 class="pe-3 mb-0">
-                        Current Price &amp; Volume for Bitcoin
+                        Histoical Price in USD &amp; Volume for Bitcoin - 7 days
                       </h6>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body px-0">
                       <ApexMixedChart
                         :id="`howdy`"
                         v-if="rerenderData > 0"
