@@ -24,7 +24,6 @@ export default {
           // time = time + time.timezoneOffset()
           e[0]
       )
-      console.log(times)
       // set up colors
       const cPrimary = '#5252F9'
       const cWarning = '#ffb016'
