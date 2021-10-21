@@ -67,7 +67,7 @@
                 border-bottom border-end
               "
             >
-              Ticker
+              Prices
             </a>
             <!-- <a href="#!" class="col-6 hover-bg-gray text-center p-4 border-end">
               <img
