@@ -11,7 +11,7 @@
           class="
             pb-0
             py-4
-            px-xl-4 px-lg-4
+            px-xl-4 px-lg-4 px-xxl-4
             d-flex
             flex-column-fluid
             position-relative
@@ -78,7 +78,7 @@
             content
             pb-0
             py-4
-            px-lg-4 px-xl-4
+            px-lg-4 px-xl-4 px-xxl-4
             d-flex
             flex-column-fluid
             position-relative
