@@ -12,7 +12,7 @@
 		- Caching - There would be a need to cache responses from any 3rd party API calls. This would improve speed to our front end and limit API calls to 3rd parties. Even if the cache lasted for a few seconds in order to make sure market data is current, it would be well worth it.
 		- Concurrence - After building out separate clients for each exchange it would be important to run all those calls concurrently so there won't be a delay between each call.
  - What are some other enhancements you would have made, if you had more time to do this implementation?
-	 - Error handling for external APIs. So that includes retrying calls, error logging for failed call, and showing errors in the front end as well.
+	 - More error handling for APIs (internal and external). So that includes retrying calls, error logging for failed call, and showing errors in the front end as well.
 	 - I would love to show the user a list of base and quote symbols to choose from that would be loaded from an external API. I would love to add more pages with more granular choices for looking at other pieces of information.
 	 - And adding the ability for a user to login and save some assets to watch for their own customized dashboard.
 	 - Lastly, I would like to dockerize the backend package so it can easily be run on any machine.
