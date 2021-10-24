@@ -1,7 +1,7 @@
 ## Questionnaire
 - Are there any sub-optimal choices( or short cuts taken due to limited time ) in your implementation?
 	- In the beginning of this project I started by writing different calls to different exchanges’ APIs. As I did more discovery, I encountered the Shrimpy Dev API  [https://developers.shrimpy.io/](https://developers.shrimpy.io/). I decided to use that as it would open the door to a lot more exchanges. If this were a full build out for an actual service I would build out API clients for each exchange that is supported. 
-	- Also, with more time I would focus on compartmentalizing and refactoring my code more into much cleanre and reusable components than I have created.
+	- Also, with more time I would focus on compartmentalizing and refactoring my code more into much cleaner and reusable components than I have created.
 - Is any part of it over-designed? ( It is fine to over-design to showcase your skills as long as you are clear about it)
 	- The UI - I put a very heavy emphasis on the UI. As an end user myself, I know how important an intuitive UX is. 
 	- The ability to select cryptos and quote currency.
