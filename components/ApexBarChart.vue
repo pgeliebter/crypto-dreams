@@ -44,7 +44,6 @@ export default {
           maxValue = dataProps.orderBooks[i].orderBook.asks[0].price
         }
       }
-      console.log(largestDifference, minValue, maxValue)
 
       // set up colors for chart
       const cPrimary = '#5252F9'
