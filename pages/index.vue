@@ -1,12 +1,13 @@
 <template>
   <body>
-    <!-- <Preloader /> -->
     <div class="d-flex flex-column flex-root">
-      <!--///////////Page content wrapper///////////////-->
+      <!-- page wrapper begin -->
       <main class="d-flex flex-column flex-row-fluid">
+        <!-- navbar begin -->
         <Navbar />
+        <!-- navbar end -->
 
-        <!--//Page Toolbar//-->
+        <!-- page toolbar begin -->
         <div
           class="
             pb-0
@@ -22,6 +23,7 @@
             <div class="card card-body">
               <div class="d-flex align-items-center">
                 <div class="me-3">
+                  <!-- refresh button begin -->
                   <button
                     @click="getSpreadData(baseSymbol, quoteSymbol)"
                     type="button"
@@ -33,8 +35,11 @@
                       data-feather="refresh-cw"
                     ></i>
                   </button>
+                  <!-- refresh button end -->
                 </div>
                 <h6 class="pe-3 mb-0">Bid - Ask for</h6>
+
+                <!-- select base symbol begin -->
                 <div class="flex-grow-0 me-1">
                   <select
                     @change="changeBaseSymbol"
@@ -51,8 +56,11 @@
                     </option>
                   </select>
                 </div>
+                <!-- select base symbol end -->
+
                 <h6 class="ms-1 mb-0">&nbsp;in&nbsp;</h6>
 
+                <!-- select quote symbol begin -->
                 <div class="flex-grow-0 ms-1">
                   <select
                     @change="changeQuoteSymbol"
@@ -65,14 +73,14 @@
                     </option>
                   </select>
                 </div>
+                <!-- select quote symbol end -->
               </div>
             </div>
           </div>
         </div>
+        <!-- page toolbar end  -->
 
-        <!--//Page Toolbar End//-->
-
-        <!--//Page content//-->
+        <!-- page content start -->
         <div
           class="
             content
@@ -92,16 +100,18 @@
                   <div class="d-flex card-header align-items-center">
                     <h6 class="pe-3 mb-0">Bids &amp; Asks</h6>
                   </div>
+                  <!-- bar chart begin -->
                   <div class="card-body px-0">
                     <client-only>
                       <ApexBarChart
                         :id="'my-chart'"
                         v-if="rerenderData > 0"
-                        :data-props="exchangesSpreads"
+                        :data-props="exchangeSpreads"
                         :key="rerenderData"
                       />
                     </client-only>
                   </div>
+                  <!-- bar chart end -->
                 </div>
               </div>
               <div
@@ -121,7 +131,7 @@
                   >
                     <h6 class="pe-3 mb-0">Recommendations</h6>
                   </div>
-
+                  <!-- recommendations begin -->
                   <ul
                     class="
                       card-body
@@ -163,20 +173,19 @@
                       </h3>
                     </li>
                   </ul>
-                  <!-- </div> -->
+                  <!-- recommendations end -->
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!--//Page content End//-->
+        <!-- page content end -->
+        <!-- footer begin -->
         <Footer />
+        <!-- footer end -->
       </main>
-      <!--///////////Page content wrapper End///////////////-->
+      <!-- page wrapper end -->
     </div>
-    <script>
-      feather.replace()
-    </script>
   </body>
 </template>
 <script>
@@ -193,69 +202,77 @@ export default {
         exchange: '',
       },
       selectedCrypto: '',
-      exchangesSpreads: {},
+      exchangeSpreads: {},
       cryptos: ['BTC', 'ETH', 'ETC', 'BNB', 'SOL', 'LUNA'],
-      quotes: ['USD', 'GBP', 'EUR'],
+      quotes: ['USD', 'EUR'],
       baseSymbol: 'BTC',
       quoteSymbol: 'USD',
     }
   },
 
   mounted: function () {
+    // replace all icons with feather icons
     feather.replace()
+    // call our backend (and chart) to get the data on mount
     this.getSpreadData(this.baseSymbol, this.quoteSymbol)
   },
   methods: {
-    setBuyOnAndSellOn: function (exchangesSpreads) {
-      let buyPrice = exchangesSpreads.orderBooks[0].orderBook.asks[0].price
-      let sellPrice = 0
-      let buyExchange = ''
-      let sellExchange = ''
-      exchangesSpreads.orderBooks.forEach((book, index) => {
-        if (book.orderBook.asks[0].price <= buyPrice) {
-          buyPrice = Number(book.orderBook.asks[0].price).toFixed(2)
-          buyExchange = book.exchange
-        }
-        if (book.orderBook.bids[0].price >= sellPrice) {
-          sellPrice = Number(book.orderBook.bids[0].price).toFixed(2)
-          sellExchange = book.exchange
-        }
-      })
-      this.buyInfo = {
-        price: buyPrice,
-        exchange: buyExchange,
-      }
-      this.sellInfo = {
-        price: sellPrice,
-        exchange: sellExchange,
-      }
-    },
     getSpreadData: function (base, quote) {
+      // call our backend
       this.$axios
         .get(`/spreads`, {
           params: { base: base, quote: quote },
         })
         .then((response) => {
-          this.exchangesSpreads = response.data[0]
-          this.setBuyOnAndSellOn(response.data[0])
+          // set up data for the chart
+          this.exchangeSpreads = response.data[0]
+          // call our comparison function
+          this.setBuyOnAndSellOn()
+          // increment the rerenderData to force a rerender of chart
           this.rerenderData += 1
         })
         .catch((errors) => {
           console.log(errors.response.status, errors.response.data)
         })
     },
+    setBuyOnAndSellOn: function () {
+      // set up data to be used later on
+      let buyPrice = this.exchangeSpreads.orderBooks[0].orderBook.asks[0].price
+      let sellPrice = 0
+      let buyExchange = ''
+      let sellExchange = ''
+      // loop through and find the best buy info and best sell info
+      this.exchangeSpreads.orderBooks.forEach((book) => {
+        // set the best buy price and best buy exchange
+        if (book.orderBook.asks[0].price <= buyPrice) {
+          buyPrice = Number(book.orderBook.asks[0].price).toFixed(2)
+          buyExchange = book.exchange
+        }
+        // set the best sell price and best sell exchange
+        if (book.orderBook.bids[0].price >= sellPrice) {
+          sellPrice = Number(book.orderBook.bids[0].price).toFixed(2)
+          sellExchange = book.exchange
+        }
+      })
+      // set the buy info in data
+      this.buyInfo = {
+        price: buyPrice,
+        exchange: buyExchange,
+      }
+      // set the sell info in data
+      this.sellInfo = {
+        price: sellPrice,
+        exchange: sellExchange,
+      }
+    },
     changeBaseSymbol: function (e) {
+      // take in change event and set the data to current value
       this.baseSymbol = e.target.value
     },
     changeQuoteSymbol: function (e) {
+      // take in change event and set the data to current value
       this.quoteSymbol = e.target.value
     },
-    // not being used right now
-    // getExchangeAssets: function (exchange) {
-    //   this.$axios
-    //     .get(`/exchanges/assets`, { params: { exchange: exchange } })
-    //     .then((response) => console.log(response.data))
-    // },
   },
 }
 </script>
