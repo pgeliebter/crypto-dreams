@@ -9,6 +9,8 @@ This was built using Nuxt.js
 
 ## Build Setup
 
+Node version - 14.18.1
+
 First, you need to clone the repo down to your local machine.  
 Go to the directory where this will be installed and:
 ```bash
