@@ -10,39 +10,58 @@ export default {
   },
 
   mounted: function () {
+    // call the chart on load
     this.apexMixedChart(this.dataProps)
   },
   props: { dataProps: Object, id: String },
   methods: {
     apexMixedChart: function (dataProps) {
-      // set up data for later usage
-      const totalVolumes = dataProps.total_volumes.map((e) => e[1])
-      const prices = dataProps.prices.map((e) => e[1])
-      const times = dataProps.prices.map(
-        (e) =>
-          // const time = new Date(e[0])
-          // time = time + time.timezoneOffset()
-          e[0]
-      )
+      // set up data for later usage using a single loop
+      let minVolume = dataProps.total_volumes[0][1]
+      let maxVolume = dataProps.total_volumes[0][1]
+      let minPrice = dataProps.prices[0][1]
+      let maxPrice = dataProps.prices[0][1]
+      const totalVolumes = []
+      const prices = []
+      const times = []
+
+      for (let i = 0; i < dataProps.total_volumes.length; i++) {
+        const currentVolume = dataProps.total_volumes[i][1]
+        const currentPrice = dataProps.prices[i][1]
+        totalVolumes.push(currentVolume)
+        prices.push(dataProps.prices[i][1])
+        times.push(dataProps.prices[i][0])
+        if (currentVolume > maxVolume) {
+          maxVolume = currentVolume
+        }
+        if (currentVolume < minVolume) {
+          minVolume = currentVolume
+        }
+        if (currentPrice > maxPrice) {
+          maxPrice = currentPrice
+        }
+        if (currentPrice < minPrice) {
+          minPrice = currentPrice
+        }
+      }
+
       // set up colors
       const cPrimary = '#5252F9'
-      const cWarning = '#ffb016'
-      const cSecondary = '#ff4d62'
       const cSuccess = '#4BC98D'
       const cMuted = '#a5a5bc'
-      const cBodycolor = '#31314d'
-      const cLight = '#f3f6fb'
       const cGray = '#e3e7ef'
       const cFont = 'inherit'
 
       new ApexCharts(document.querySelector(`#${this.id}`), {
         series: [
           {
+            // series for total volumes
             name: 'Volume',
             type: 'column',
             data: totalVolumes,
           },
           {
+            // series for prices
             name: 'Price',
             type: 'line',
             data: prices,
@@ -58,11 +77,11 @@ export default {
           },
           height: 400,
           animations: {
+            // animations for the chart
             enabled: true,
             speed: 1000,
             animateGradually: {
               enabled: true,
-              // delay: 100,
             },
             dynamicAnimation: {
               enabled: true,
@@ -70,7 +89,6 @@ export default {
             },
           },
         },
-
         stroke: {
           width: [0, 1],
         },
@@ -81,14 +99,9 @@ export default {
         tooltip: {
           inverseOrder: true,
           followCursor: false,
-          // fixed: {
-          //   // enabled: true,
-          //   // position: 'topLeft',
-          //   offsetX: 100,
-          //   offsetY: -30,
-          // },
           x: {
             show: true,
+            // formatting the tooltip x value / date
             format: 'dd MMM h:mm tt',
           },
         },
@@ -98,14 +111,14 @@ export default {
           crosshairs: {
             show: false,
           },
-          // forceNiceScale: true,
-          min: Math.min(...times),
-          max: Math.max(...times),
+          min: times[0],
+          max: times[times.length - 1],
           labels: {
             show: true,
+            // are labels in UTC?
             datetimeUTC: false,
-            // hideOverlappingLabels: true,
             datetimeFormatter: {
+              // setting up formatter in order it needs to be called elsewhere
               year: 'yyyy',
               month: "MMM 'yy",
               day: 'dd MMM',
@@ -151,7 +164,8 @@ export default {
                 colors: cMuted,
                 fontFamily: cFont,
               },
-              formatter: function (value, index) {
+              formatter: function (value) {
+                // make the volume axis show in millions
                 return value / 1000000
               },
             },
@@ -160,8 +174,9 @@ export default {
               show: false,
             },
             forceNiceScale: true,
-            min: Math.min(...totalVolumes),
-            max: Math.max(...totalVolumes),
+            // uses min and max volume from above
+            min: minVolume,
+            max: maxVolume,
           },
           {
             decimalsInFloat: 0,
@@ -181,8 +196,9 @@ export default {
               show: false,
             },
             forceNiceScale: true,
-            min: Math.min(...prices),
-            max: Math.max(...prices),
+            // uses min and max price from above
+            min: minPrice,
+            max: maxPrice,
           },
         ],
         plotOptions: {
