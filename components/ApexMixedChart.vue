@@ -186,11 +186,9 @@ export default {
                 colors: cMuted,
                 fontFamily: cFont,
               },
-              // offsetX: -10,
             },
             title: {
               text: 'Price',
-              // offsetX: -10,
             },
             crosshairs: {
               show: false,
