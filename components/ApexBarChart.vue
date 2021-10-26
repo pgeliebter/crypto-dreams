@@ -62,7 +62,7 @@ export default {
       const cFont = 'inherit'
 
       // new chart being auto inserted into its own named div so no conflict with any other chart
-      const chart = new ApexCharts(document.querySelector(`#${this.id}`), {
+      new ApexCharts(document.querySelector(`#${this.id}`), {
         chart: {
           fontFamily: cFont,
           type: 'bar',
