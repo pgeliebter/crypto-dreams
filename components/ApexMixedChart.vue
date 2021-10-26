@@ -111,11 +111,9 @@ export default {
           crosshairs: {
             show: false,
           },
-          min: times[0],
-          max: times[times.length - 1],
           labels: {
             show: true,
-            // are labels in UTC?
+            // set true time should be displayed as utc
             datetimeUTC: false,
             datetimeFormatter: {
               // setting up formatter in order it needs to be called elsewhere
