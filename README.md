@@ -39,7 +39,7 @@ npm run generate
 
 ## Live Version and Back End
 
-You can check out the front end for this project here:  
+You can check out the back end for this project here:  
 [https://github.com/pgeliebter/crypto-dreams-backend](https://github.com/pgeliebter/crypto-dreams-backend)
 
   
