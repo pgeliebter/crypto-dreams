@@ -182,12 +182,6 @@ export default {
           console.log(errors.response.status, errors.response.data)
         })
     },
-    // changeBaseSymbol: function (e) {
-    //   this.baseSymbol = e.target.value
-    // },
-    // changeQuoteSymbol: function (e) {
-    //   this.quoteSymbol = e.target.value
-    // },
   },
 }
 </script>
