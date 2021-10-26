@@ -266,11 +266,11 @@ export default {
       }
     },
     changeBaseSymbol: function (e) {
-      // take in change event and set the data to current value
+      // take in change and set the data to current value
       this.baseSymbol = e.target.value
     },
     changeQuoteSymbol: function (e) {
-      // take in change event and set the data to current value
+      // take in change and set the data to current value
       this.quoteSymbol = e.target.value
     },
   },
