@@ -18,30 +18,39 @@ export default {
   props: { dataProps: Object, id: String },
   methods: {
     ApexBarChart: function (dataProps) {
-      // func to return how many digits are in the price of the crypto
-      const log10 = function (n) {
-        return Math.log(n) / Math.log(10)
-      }
-
-      //  single loop to find the largest spread, min bid value, and max bid value to set y axis data later on
+      // setting up our variables for a single loop to find the largest spread, min bid value, and max bid value to set y axis data later on and to create three arrays (bids,asks,catagories/exchanges) for use later on
       let largestDifference = -1
-      let minValue = dataProps.orderBooks[0].orderBook.bids[0].price
-      let maxValue = dataProps.orderBooks[0].orderBook.asks[0].price
+      let minValue = Number(dataProps.orderBooks[0].orderBook.bids[0].price)
+      let maxValue = Number(dataProps.orderBooks[0].orderBook.asks[0].price)
+      const bidsArray = []
+      const asksArray = []
+      const exchangesArray = []
+
       // looping through data
       for (let i = 0; i < dataProps.orderBooks.length; i++) {
+        // creating an array of bids,asks, and exchanges
+        bidsArray.push(Number(dataProps.orderBooks[i].orderBook.bids[0].price))
+        asksArray.push(Number(dataProps.orderBooks[i].orderBook.asks[0].price))
+        exchangesArray.push(dataProps.orderBooks[i].exchange)
+
         // finding the largest spread
-        let currentDifference =
-          dataProps.orderBooks[i].orderBook.asks[0].price -
-          dataProps.orderBooks[i].orderBook.bids[0].price
+        const currentDifference =
+          Number(dataProps.orderBooks[i].orderBook.asks[0].price) -
+          Number(dataProps.orderBooks[i].orderBook.bids[0].price)
         if (currentDifference > largestDifference) {
           largestDifference = currentDifference
         }
         // finding the min bid value
-        if (dataProps.orderBooks[i].orderBook.bids[0].price < minValue) {
-          minValue = dataProps.orderBooks[i].orderBook.bids[0].price
+        if (
+          Number(dataProps.orderBooks[i].orderBook.bids[0].price) < minValue
+        ) {
+          minValue = Number(dataProps.orderBooks[i].orderBook.bids[0].price)
         }
-        if (dataProps.orderBooks[i].orderBook.asks[0].price > maxValue) {
-          maxValue = dataProps.orderBooks[i].orderBook.asks[0].price
+        // finding the max bid value
+        if (
+          Number(dataProps.orderBooks[i].orderBook.asks[0].price > maxValue)
+        ) {
+          maxValue = Number(dataProps.orderBooks[i].orderBook.asks[0].price)
         }
       }
 
@@ -53,7 +62,7 @@ export default {
       const cFont = 'inherit'
 
       // new chart being auto inserted into its own named div so no conflict with any other chart
-      new ApexCharts(document.querySelector(`#${this.id}`), {
+      const chart = new ApexCharts(document.querySelector(`#${this.id}`), {
         chart: {
           fontFamily: cFont,
           type: 'bar',
@@ -64,15 +73,7 @@ export default {
           animations: {
             // animations on reload of component to make it prettier
             enabled: true,
-            speed: 1000,
-            animateGradually: {
-              enabled: true,
-              delay: 100,
-            },
-            dynamicAnimation: {
-              enabled: true,
-              speed: 350,
-            },
+            speed: 700,
           },
         },
         colors: [cPrimary, cWarning],
@@ -100,11 +101,11 @@ export default {
           // each label gets two data one for the bids and one for ask
           {
             name: 'Bids',
-            data: dataProps.orderBooks.map((x) => x.orderBook.bids[0].price),
+            data: bidsArray,
           },
           {
             name: 'Asks',
-            data: dataProps.orderBooks.map((x) => x.orderBook.asks[0].price),
+            data: asksArray,
           },
         ],
         xaxis: {
@@ -123,8 +124,8 @@ export default {
           tooltip: {
             enabled: false,
           },
-          // catagories are our labels for the x axis
-          categories: dataProps.orderBooks.map((x) => x.exchange),
+          // catagories are our labels for the x axis which are exchanges
+          categories: exchangesArray,
           crosshairs: {
             show: false,
             fill: {
@@ -145,44 +146,23 @@ export default {
               colors: cMuted,
               fontFamily: cFont,
             },
-            // the formatter is using the log10 func to determine how many digits to show in the y access
-            formatter: function (val, index) {
-              if (log10(val) > 1) {
-                return Math.round(val)
+            // the formatter is using the spread  to determine how many digits to show in the y axis
+            formatter: function (val) {
+              if (largestDifference < 2) {
+                return val.toFixed(2)
               } else {
-                return val.toFixed(4)
+                return Math.round(val)
               }
             },
           },
+          tickAmount: '',
           crosshairs: {
             show: false,
           },
           // force nice scale allows the chart to dynamically adjust the y axis based on our previous formatter
           forceNiceScale: true,
-          // min and max are set to the min and max of our y axis
-          min: function () {
-            // using minValue from above
-            let min = minValue
-            // subtracting largest spread from smallest spread to set the min value
-            min = min - largestDifference
-            // evaluating how many thousands are in our min
-            if (log10(min) > 2) {
-              return min
-            } else {
-              return min
-            }
-          },
-          max: function () {
-            // using maxValue from above
-            let max = maxValue
-            // evaluating how many thousands are in our min
-
-            if (log10(max) > 2) {
-              return Math.round(max)
-            } else {
-              return max
-            }
-          },
+          min: minValue - largestDifference / 2,
+          max: maxValue,
         },
         plotOptions: {
           bar: {
@@ -205,22 +185,20 @@ export default {
             // setting up the formatter for our tool tip to show our currency and formatted price for asks and bids
             {
               formatter: function (y) {
-                if (typeof y !== 'undefined' && log10(y) <= 2) {
+                if (largestDifference < 2) {
                   return `${dataProps.quoteSymbol} ${y.toFixed(2)}`
-                } else if (typeof y !== 'undefined') {
+                } else {
                   return `${dataProps.quoteSymbol} ${y.toFixed(0)}`
                 }
-                return y
               },
             },
             {
               formatter: function (y) {
-                if (typeof y !== 'undefined' && log10(y) <= 2) {
+                if (largestDifference < 2) {
                   return `${dataProps.quoteSymbol} ${y.toFixed(2)}`
-                } else if (typeof y !== 'undefined') {
+                } else {
                   return `${dataProps.quoteSymbol} ${y.toFixed(0)}`
                 }
-                return y
               },
             },
           ],
