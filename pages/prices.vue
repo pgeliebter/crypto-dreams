@@ -1,11 +1,13 @@
 <template>
   <body>
     <div class="d-flex fle x-column flex-root">
-      <!--///////////Page content wrapper///////////////-->
+      <!-- page wrapper begin -->
       <main class="d-flex flex-column flex-row-fluid">
+        <!-- navbar begin -->
         <Navbar />
+        <!-- navbar end -->
 
-        <!--//Page Toolbar//-->
+        <!-- toolbar begin -->
         <div
           class="
             pb-0
@@ -38,7 +40,9 @@
             </div>
           </div>
         </div>
-        <!--//Page Toolbar End//-->
+        <!-- toolbar end -->
+
+        <!-- page content begin -->
         <div
           class="
             content
@@ -60,7 +64,7 @@
                   mb-4
                 "
               >
-                <!-- card header -->
+                <!-- card header begin-->
                 <div class="card h-100 overflow-hidden">
                   <div
                     class="
@@ -72,9 +76,9 @@
                   >
                     <h6 class="pe-3 mb-0">Current Price</h6>
                   </div>
-                  <!-- card body -->
+                  <!-- card header end -->
 
-                  <!--Card body-->
+                  <!-- card body begin -->
                   <div
                     class="
                       card-body
@@ -85,7 +89,7 @@
                       align-items-center
                     "
                   >
-                    <!--logo-->
+                    <!-- currency logo begin -->
                     <div
                       class="
                         avatar
@@ -102,6 +106,9 @@
                         alt=""
                       />
                     </div>
+                    <!-- currency logo end -->
+
+                    <!-- pricing begin -->
                     <h5 class="mb-0 pt-3">
                       <div class="text-dark">
                         Price: ${{ currentPriceInfo.usd }}
@@ -110,9 +117,11 @@
                     <span class="pt-4 small d-block">
                       24h change: {{ currentPriceInfo.usd_24h_change }}%
                     </span>
+                    <!-- pricing end -->
                   </div>
                 </div>
               </div>
+              <!-- chart card begin -->
               <div class="col-12 col-lg-8 col-xl-9 mb-4">
                 <div class="card h-100">
                   <div class="d-flex card-header align-items-center">
@@ -130,12 +139,16 @@
                   </div>
                 </div>
               </div>
+              <!-- chart card end -->
             </div>
           </div>
         </div>
+        <!-- page content end -->
       </main>
     </div>
+    <!-- footer begin -->
     <Footer />
+    <!-- footer end -->
   </body>
 </template>
 <script>
@@ -143,16 +156,15 @@ export default {
   data: function () {
     return {
       rerenderData: 0,
-      // cryptos: ['BTC', 'ETH', 'ETC'],
-      // quotes: ['USD', 'GBP', 'EUR'],
-      // baseSymbol: 'BTC',
-      // quoteSymbol: 'USD',
       priceData: {},
       currentPriceInfo: { usd: '', usd_24h_change: '' },
     }
   },
+
   mounted: function () {
+    // replace all icons with feather icons
     feather.replace()
+    // call our backend (and chart) to get the data on mount
     this.getCoinGeckoMarketChart()
   },
 
