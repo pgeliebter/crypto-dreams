@@ -25,7 +25,7 @@ export default {
 			{
 				hid: 'image',
 				property: 'og:image',
-				content: 'https://ibb.co/HT1BqKj'
+				content: 'https://i.ibb.co/jkBbD8S/favicon.png'
 			},
 			{
 				hid: 'title',
