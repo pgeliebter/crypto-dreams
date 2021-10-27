@@ -25,7 +25,7 @@ export default {
 			{
 				hid: 'image',
 				property: 'og:image',
-				content: '~/static/favicon.png'
+				content: '/static/favicon.png'
 			},
 			{
 				hid: 'title',
