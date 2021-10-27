@@ -15,14 +15,19 @@ export default {
 				name: 'viewport',
 				content: 'width=device-width, initial-scale=1'
 			},
-			{ hid: 'og:title', content: 'Fulfill Your Crypto Dreams' },
+			{
+				hid: 'title',
+				name: 'title',
+				content: 'Fulfill Your Crypto Dreams'
+			},
 
 			{
-				hid: 'og:description',
+				hid: 'description',
+				name: 'description',
 				content:
 					'See spreads on popular exchanges and exploit them for some arbitrage. 🚀🌕'
 			},
-			{ hid: 'og:image', content: '~/static/favicon.png' },
+			{ hid: 'image', name: 'image', content: '~/static/favicon.png' },
 
 			{ name: 'format-detection', content: 'telephone=no' }
 		],
