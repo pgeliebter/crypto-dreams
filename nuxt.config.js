@@ -15,7 +15,15 @@ export default {
 				name: 'viewport',
 				content: 'width=device-width, initial-scale=1'
 			},
-			{ hid: 'description', name: 'description', content: '' },
+			{ hid: 'og:title', content: 'Fulfill Your Crypto Dreams' },
+
+			{
+				hid: 'og:description',
+				content:
+					'See spreads on popular exchanges and exploit them for some arbitrage. 🚀🌕'
+			},
+			{ hid: 'og:image', content: '~/static/favicon.png' },
+
 			{ name: 'format-detection', content: 'telephone=no' }
 		],
 		link: [
@@ -56,9 +64,13 @@ export default {
 			}
 		],
 		script: [
-			{ type: "text/javascript", src: '/assets/js/theme.bundle.js',body:true},
+			{
+				type: 'text/javascript',
+				src: '/assets/js/theme.bundle.js',
+				body: true
+			},
 			{ src: '/assets/vendor/feather.min.js', body: true },
-			{	src: '/assets/vendor/apexcharts.min.js',	body: true	}
+			{ src: '/assets/vendor/apexcharts.min.js', body: true }
 		]
 	},
 
