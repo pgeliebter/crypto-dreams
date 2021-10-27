@@ -15,11 +15,6 @@ export default {
 				name: 'viewport',
 				content: 'width=device-width, initial-scale=1'
 			},
-			{
-				hid: 'title',
-				name: 'title',
-				content: 'Fulfill Your Crypto Dreams'
-			},
 
 			{
 				hid: 'description',
@@ -27,7 +22,32 @@ export default {
 				content:
 					'See spreads on popular exchanges and exploit them for some arbitrage. 🚀🌕'
 			},
-			{ hid: 'image', name: 'image', content: '~/static/favicon.png' },
+			{
+				hid: 'image',
+				property: 'og:image',
+				content: '~/static/favicon.png'
+			},
+			{
+				hid: 'title',
+				property: 'og:title',
+				content: 'Fulfill Your Crypto Dreams'
+			},
+			{
+				hid: 'og:description',
+				property: 'og:description',
+				content:
+					'See spreads on popular exchanges and exploit them for some arbitrage. 🚀🌕'
+			},
+			{
+				hid: 'type',
+				property: 'og:type',
+				content: 'website'
+			},
+			{
+				hid: 'url',
+				property: 'og:url',
+				content: 'https://crypto-dreams.netlify.app'
+			},
 
 			{ name: 'format-detection', content: 'telephone=no' }
 		],
