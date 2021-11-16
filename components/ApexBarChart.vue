@@ -13,11 +13,11 @@ export default {
 
   mounted: function () {
     // call the chart on component load
-    this.ApexBarChart(this.dataProps)
+    this.apexBarChart(this.dataProps)
   },
   props: { dataProps: Object, id: String },
   methods: {
-    ApexBarChart: function (dataProps) {
+    apexBarChart: function (dataProps) {
       // setting up our variables for a single loop to find the largest spread, min bid value, and max bid value to set y axis data later on and to create three arrays (bids,asks,catagories/exchanges) for use later on
       let largestDifference = -1
       let minValue = Number(dataProps.orderBooks[0].orderBook.bids[0].price)
