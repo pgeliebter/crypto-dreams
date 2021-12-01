@@ -35,7 +35,7 @@
                     ></i>
                   </button>
                 </div>
-                <h6 class="pe-3 mb-0">Price info for Bitcoin</h6>
+                <p class="pe-3 mb-0 h6">Spot price and historical info for Bitcoin from <a href="https://coingecko.com">CoinGecko.com</a></p>
               </div>
             </div>
           </div>
