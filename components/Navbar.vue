@@ -15,93 +15,28 @@
         <!-- Icon made by Pixel perfect from www.flaticon.com -->
         <img src="/favicon.png" class="fe-4x align-middle" alt="" />
       </li>
+      <!-- test -->
+     
       <!-- this is the four squares which will be used for navigation -->
-      <li
-        class="
-          ps-4
-          nav-item
-          d-flex
-          flex-column
-          h-100
-          justify-content-center
-          dropdown
-        "
-      >
-        <a
-          href="#"
-          data-bs-toggle="dropdown"
-          class="
-            hover-bg-primary
-            nav-link
-            rounded-circle
-            size-35
-            d-flex
-            align-items-center
-            justify-content-center
-            p-0
-          "
-        >
-          <i data-feather="grid" class="fe-1x align-middle"></i>
-        </a>
-        <div class="dropdown-menu overflow-hidden p-0 mt-0">
-          <div class="row mx-0">
-            <a
-              href="/"
-              class="
-                col-6
-                hover-bg-gray
-                text-center
-                p-4
-                border-bottom border-end
-              "
-            >
-              Spreads
-            </a>
-            <a
-              href="/prices"
-              class="
-                col-6
-                hover-bg-gray
-                text-center
-                p-4
-                border-bottom border-end
-              "
-            >
-              Prices
-            </a>
-            <!-- <a href="#!" class="col-6 hover-bg-gray text-center p-4 border-end">
-              <img
-                src="assets/media/brand-logos/atlassian.svg"
-                class="height-30 w-auto"
-                alt=""
-              />
-            </a>
-            <a href="#!" class="col-6 hover-bg-gray text-center p-4">
-              <img
-                src="assets/media/brand-logos/figma.svg"
-                class="height-30 w-auto"
-                alt=""
-              />
-            </a> -->
-          </div>
-        </div>
-      </li>
-      <h3 class="ms-10 mb-0">Welcome to Crypto Dreams!</h3>
+     
+     
+      
     </ul>
-    <ul class="navbar-nav ms-auto d-flex align-items-center h-100">
-      <li
-        class="
-          nav-item
-          dropdown
-          d-flex
-          align-items-center
-          justify-content-center
-          flex-column
-          h-100
-          me-lg-1
-        "
-      ></li>
-    </ul>
+     <ul class="navbar-nav ps-5 me-lg-5">
+                    
+                  <li class="nav-item py-lg-3 me-lg-2 ">
+                    <a  class="nav-link" :class="this.$route.name === 'index' ? 'active' : ''" href="/">Spreads</a>
+                  </li>
+                  <li class="nav-item py-lg-3 me-lg-2">
+                      <a class="nav-link "  :class="this.$route.name === 'prices' ? 'active' : ''" href="/prices">Prices</a>
+                    </li>
+                   
+                </ul>
+                     <h3 class="ms-10 mb-0">Welcome to Crypto Dreams!</h3>
+
+  
   </header>
   <!--Main Header End-->
 </template>
+<script>
+</script>
