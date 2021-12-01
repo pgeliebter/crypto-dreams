@@ -9,9 +9,11 @@
 
       <!-- this is the four squares which will be used for navigation -->
     </ul>
-    <h3 class="mb-0 ms-3">Welcome to Crypto Dreams!</h3>
+    
+    
 
     <ul class="navbar-nav ps-5 me-lg-5">
+      <p class="nav-item align-self-center mb-0 ps-2 pe-3 flex-shrink-1 h5">Welcome to Crypto Dreams!</p>
       <li class="nav-item py-lg-3 me-lg-2">
         <a class="nav-link" :class="this.$route.name === 'index' ? 'active' : ''" href="/">Spreads</a>
       </li>
